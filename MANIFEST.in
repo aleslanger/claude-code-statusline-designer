@@ -1,0 +1,5 @@
+# The sdist must be able to run its own test suite (setuptools only picks up
+# tests/test_*.py by default, not the conftest and the pty helper they import).
+include Makefile
+recursive-include tests *.py
+recursive-include scripts *.py

@@ -1,0 +1,445 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="931" height="476" viewBox="0 0 931 476" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="14">
+<defs>
+<pattern id="shade1c1c1c" width="2.8" height="2.8" patternUnits="userSpaceOnUse"><rect width="1.4" height="1.4" fill="#1c1c1c"/></pattern>
+<pattern id="shade262626" width="2.8" height="2.8" patternUnits="userSpaceOnUse"><rect width="1.4" height="1.4" fill="#262626"/></pattern>
+<pattern id="shade444444" width="2.8" height="2.8" patternUnits="userSpaceOnUse"><rect width="1.4" height="1.4" fill="#444444"/></pattern>
+</defs>
+<rect width="100%" height="100%" rx="10" fill="#2d2d2d"/>
+<rect y="30" width="100%" height="436" fill="#1c1c1c"/>
+<rect y="456" width="100%" height="20" rx="10" fill="#1c1c1c"/>
+<circle cx="20" cy="15.0" r="6" fill="#ff5f57"/>
+<circle cx="40" cy="15.0" r="6" fill="#febc2e"/>
+<circle cx="60" cy="15.0" r="6" fill="#28c840"/>
+<text x="465" y="20.0" fill="#8a8a8a" text-anchor="middle">dark themes</text>
+<rect x="167.2" y="46" width="142.8" height="18" fill="#303030"/>
+<rect x="310.0" y="46" width="168.0" height="18" fill="#005f87"/>
+<rect x="478.0" y="46" width="75.6" height="18" fill="#008700"/>
+<rect x="553.6" y="46" width="84.0" height="18" fill="#0087ff"/>
+<rect x="637.6" y="46" width="58.8" height="18" fill="#af5f00"/>
+<rect x="696.4" y="46" width="142.8" height="18" fill="#444444"/>
+<text x="16.0" y="59.3" fill="#8a8a8a" textLength="67.2" lengthAdjust="spacingAndGlyphs">agnoster</text>
+<text x="175.6" y="59.3" fill="#bcbcbc" textLength="126.0" lengthAdjust="spacingAndGlyphs">dev@workstation</text>
+<polygon points="310.0,46 318.4,55.0 310.0,64" fill="#303030"/>
+<text x="326.8" y="59.3" fill="#eeeeee" textLength="142.8" lengthAdjust="spacingAndGlyphs">~/projects/my-app</text>
+<polygon points="478.0,46 486.4,55.0 478.0,64" fill="#005f87"/>
+<g stroke="#eeeeee" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M497.4,50 V59"/><path d="M501.4,52.4 C501.4,56 497.4,55 497.4,57.5"/><circle cx="497.4" cy="60.2" r="1.6"/><circle cx="501.4" cy="50.8" r="1.6"/></g>
+<text x="511.6" y="59.3" fill="#eeeeee" textLength="33.6" lengthAdjust="spacingAndGlyphs">main</text>
+<polygon points="553.6,46 562.0,55.0 553.6,64" fill="#008700"/>
+<text x="570.4" y="59.3" fill="#eeeeee" textLength="67.2" lengthAdjust="spacingAndGlyphs">Sonnet 5</text>
+<polygon points="637.6,46 646.0,55.0 637.6,64" fill="#0087ff"/>
+<text x="654.4" y="59.3" fill="#eeeeee" textLength="33.6" lengthAdjust="spacingAndGlyphs">high</text>
+<polygon points="696.4,46 704.8,55.0 696.4,64" fill="#af5f00"/>
+<rect x="713.2" y="46" width="8.4" height="18" fill="#00ff00"/>
+<rect x="721.6" y="46" width="8.4" height="18" fill="#5fff00"/>
+<rect x="730.0" y="46" width="8.4" height="18" fill="url(#shade262626)"/>
+<rect x="738.4" y="46" width="8.4" height="18" fill="url(#shade262626)"/>
+<rect x="746.8" y="46" width="8.4" height="18" fill="url(#shade262626)"/>
+<rect x="755.2" y="46" width="8.4" height="18" fill="url(#shade262626)"/>
+<rect x="763.6" y="46" width="8.4" height="18" fill="url(#shade262626)"/>
+<rect x="772.0" y="46" width="8.4" height="18" fill="url(#shade262626)"/>
+<rect x="780.4" y="46" width="8.4" height="18" fill="url(#shade262626)"/>
+<rect x="788.8" y="46" width="8.4" height="18" fill="url(#shade262626)"/>
+<text x="805.6" y="59.3" fill="#eeeeee" textLength="25.2" lengthAdjust="spacingAndGlyphs">25%</text>
+<polygon points="839.2,46 847.6,55.0 839.2,64" fill="#444444"/>
+<rect x="167.2" y="64" width="142.8" height="18" fill="#303030"/>
+<rect x="310.0" y="64" width="168.0" height="18" fill="#005f87"/>
+<rect x="478.0" y="64" width="168.0" height="18" fill="#af5f00"/>
+<rect x="646.0" y="64" width="67.2" height="18" fill="#0087ff"/>
+<rect x="713.2" y="64" width="50.4" height="18" fill="#5f005f"/>
+<rect x="763.6" y="64" width="142.8" height="18" fill="#444444"/>
+<text x="175.6" y="77.3" fill="#bcbcbc" textLength="126.0" lengthAdjust="spacingAndGlyphs">dev@workstation</text>
+<polygon points="310.0,64 318.4,73.0 310.0,82" fill="#303030"/>
+<text x="326.8" y="77.3" fill="#eeeeee" textLength="142.8" lengthAdjust="spacingAndGlyphs">~/projects/webapp</text>
+<polygon points="478.0,64 486.4,73.0 478.0,82" fill="#005f87"/>
+<g stroke="#eeeeee" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M497.4,68 V77"/><path d="M501.4,70.4 C501.4,74 497.4,73 497.4,75.5"/><circle cx="497.4" cy="78.2" r="1.6"/><circle cx="501.4" cy="68.8" r="1.6"/></g>
+<text x="511.6" y="77.3" fill="#eeeeee" textLength="126.0" lengthAdjust="spacingAndGlyphs">feature/login ±</text>
+<polygon points="646.0,64 654.4,73.0 646.0,82" fill="#af5f00"/>
+<text x="662.8" y="77.3" fill="#eeeeee" textLength="50.4" lengthAdjust="spacingAndGlyphs">Opus 5</text>
+<polygon points="713.2,64 721.6,73.0 713.2,82" fill="#0087ff"/>
+<text x="730.0" y="77.3" fill="#eeeeee" textLength="25.2" lengthAdjust="spacingAndGlyphs">max</text>
+<polygon points="763.6,64 772.0,73.0 763.6,82" fill="#5f005f"/>
+<rect x="780.4" y="64" width="8.4" height="18" fill="#00ff00"/>
+<rect x="788.8" y="64" width="8.4" height="18" fill="#5fff00"/>
+<rect x="797.2" y="64" width="8.4" height="18" fill="#87ff00"/>
+<rect x="805.6" y="64" width="8.4" height="18" fill="#afff00"/>
+<rect x="814.0" y="64" width="8.4" height="18" fill="#d7ff00"/>
+<rect x="822.4" y="64" width="8.4" height="18" fill="#ffd700"/>
+<rect x="830.8" y="64" width="8.4" height="18" fill="#ffaf00"/>
+<rect x="839.2" y="64" width="8.4" height="18" fill="#ff8700"/>
+<rect x="847.6" y="64" width="8.4" height="18" fill="#ff5f00"/>
+<rect x="856.0" y="64" width="8.4" height="18" fill="url(#shade262626)"/>
+<text x="872.8" y="77.3" fill="#eeeeee" textLength="25.2" lengthAdjust="spacingAndGlyphs">90%</text>
+<polygon points="906.4,64 914.8,73.0 906.4,82" fill="#444444"/>
+<text x="16.0" y="113.3" fill="#8a8a8a" textLength="58.8" lengthAdjust="spacingAndGlyphs">minimal</text>
+<text x="167.2" y="113.3" fill="#5fafd7" textLength="142.8" lengthAdjust="spacingAndGlyphs">~/projects/my-app</text>
+<text x="318.4" y="113.3" fill="#0000ee" textLength="8.4" lengthAdjust="spacingAndGlyphs">|</text>
+<g stroke="#5faf5f" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M337.8,104 V113"/><path d="M341.8,106.4 C341.8,110 337.8,109 337.8,111.5"/><circle cx="337.8" cy="114.2" r="1.6"/><circle cx="341.8" cy="104.8" r="1.6"/></g>
+<text x="352.0" y="113.3" fill="#5faf5f" textLength="33.6" lengthAdjust="spacingAndGlyphs">main</text>
+<text x="394.0" y="113.3" fill="#0000ee" textLength="8.4" lengthAdjust="spacingAndGlyphs">|</text>
+<text x="410.8" y="113.3" fill="#5fd7d7" textLength="67.2" lengthAdjust="spacingAndGlyphs">Sonnet 5</text>
+<text x="478.0" y="113.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
+<text x="486.4" y="113.3" fill="#d7875f" textLength="33.6" lengthAdjust="spacingAndGlyphs">high</text>
+<text x="528.4" y="113.3" fill="#0000ee" textLength="8.4" lengthAdjust="spacingAndGlyphs">|</text>
+<text x="545.2" y="113.3" fill="#87ff00" textLength="58.8" lengthAdjust="spacingAndGlyphs">ctx 25%</text>
+<text x="167.2" y="131.3" fill="#5fafd7" textLength="142.8" lengthAdjust="spacingAndGlyphs">~/projects/webapp</text>
+<text x="318.4" y="131.3" fill="#0000ee" textLength="8.4" lengthAdjust="spacingAndGlyphs">|</text>
+<g stroke="#d7875f" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M337.8,122 V131"/><path d="M341.8,124.4 C341.8,128 337.8,127 337.8,129.5"/><circle cx="337.8" cy="132.2" r="1.6"/><circle cx="341.8" cy="122.8" r="1.6"/></g>
+<text x="352.0" y="131.3" fill="#d7875f" textLength="109.2" lengthAdjust="spacingAndGlyphs">feature/login</text>
+<text x="469.6" y="131.3" fill="#0000ee" textLength="8.4" lengthAdjust="spacingAndGlyphs">|</text>
+<text x="486.4" y="131.3" fill="#5fd7d7" textLength="50.4" lengthAdjust="spacingAndGlyphs">Opus 5</text>
+<text x="536.8" y="131.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
+<text x="545.2" y="131.3" fill="#d787d7" textLength="25.2" lengthAdjust="spacingAndGlyphs">max</text>
+<text x="578.8" y="131.3" fill="#0000ee" textLength="8.4" lengthAdjust="spacingAndGlyphs">|</text>
+<text x="595.6" y="131.3" fill="#ff5f00" textLength="58.8" lengthAdjust="spacingAndGlyphs">ctx 90%</text>
+<rect x="167.2" y="154" width="142.8" height="18" fill="#262626"/>
+<rect x="310.0" y="154" width="168.0" height="18" fill="#444444"/>
+<rect x="478.0" y="154" width="75.6" height="18" fill="#585858"/>
+<rect x="553.6" y="154" width="84.0" height="18" fill="#6c6c6c"/>
+<rect x="637.6" y="154" width="58.8" height="18" fill="#bcbcbc"/>
+<rect x="696.4" y="154" width="142.8" height="18" fill="#3a3a3a"/>
+<text x="16.0" y="167.3" fill="#8a8a8a" textLength="33.6" lengthAdjust="spacingAndGlyphs">mono</text>
+<text x="175.6" y="167.3" fill="#bcbcbc" textLength="126.0" lengthAdjust="spacingAndGlyphs">dev@workstation</text>
+<polygon points="310.0,154 318.4,163.0 310.0,172" fill="#262626"/>
+<text x="326.8" y="167.3" fill="#eeeeee" textLength="142.8" lengthAdjust="spacingAndGlyphs">~/projects/my-app</text>
+<polygon points="478.0,154 486.4,163.0 478.0,172" fill="#444444"/>
+<g stroke="#eeeeee" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M497.4,158 V167"/><path d="M501.4,160.4 C501.4,164 497.4,163 497.4,165.5"/><circle cx="497.4" cy="168.2" r="1.6"/><circle cx="501.4" cy="158.8" r="1.6"/></g>
+<text x="511.6" y="167.3" fill="#eeeeee" textLength="33.6" lengthAdjust="spacingAndGlyphs">main</text>
+<polygon points="553.6,154 562.0,163.0 553.6,172" fill="#585858"/>
+<text x="570.4" y="167.3" fill="#eeeeee" textLength="67.2" lengthAdjust="spacingAndGlyphs">Sonnet 5</text>
+<polygon points="637.6,154 646.0,163.0 637.6,172" fill="#6c6c6c"/>
+<text x="654.4" y="167.3" fill="#262626" textLength="33.6" lengthAdjust="spacingAndGlyphs">high</text>
+<polygon points="696.4,154 704.8,163.0 696.4,172" fill="#bcbcbc"/>
+<rect x="713.2" y="154" width="8.4" height="18" fill="#00ff00"/>
+<rect x="721.6" y="154" width="8.4" height="18" fill="#5fff00"/>
+<rect x="730.0" y="154" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="738.4" y="154" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="746.8" y="154" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="755.2" y="154" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="763.6" y="154" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="772.0" y="154" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="780.4" y="154" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="788.8" y="154" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<text x="805.6" y="167.3" fill="#eeeeee" textLength="25.2" lengthAdjust="spacingAndGlyphs">25%</text>
+<polygon points="839.2,154 847.6,163.0 839.2,172" fill="#3a3a3a"/>
+<rect x="167.2" y="172" width="142.8" height="18" fill="#262626"/>
+<rect x="310.0" y="172" width="168.0" height="18" fill="#444444"/>
+<rect x="478.0" y="172" width="168.0" height="18" fill="#808080"/>
+<rect x="646.0" y="172" width="67.2" height="18" fill="#6c6c6c"/>
+<rect x="713.2" y="172" width="50.4" height="18" fill="#eeeeee"/>
+<rect x="763.6" y="172" width="142.8" height="18" fill="#3a3a3a"/>
+<text x="175.6" y="185.3" fill="#bcbcbc" textLength="126.0" lengthAdjust="spacingAndGlyphs">dev@workstation</text>
+<polygon points="310.0,172 318.4,181.0 310.0,190" fill="#262626"/>
+<text x="326.8" y="185.3" fill="#eeeeee" textLength="142.8" lengthAdjust="spacingAndGlyphs">~/projects/webapp</text>
+<polygon points="478.0,172 486.4,181.0 478.0,190" fill="#444444"/>
+<g stroke="#eeeeee" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M497.4,176 V185"/><path d="M501.4,178.4 C501.4,182 497.4,181 497.4,183.5"/><circle cx="497.4" cy="186.2" r="1.6"/><circle cx="501.4" cy="176.8" r="1.6"/></g>
+<text x="511.6" y="185.3" fill="#eeeeee" textLength="126.0" lengthAdjust="spacingAndGlyphs">feature/login ±</text>
+<polygon points="646.0,172 654.4,181.0 646.0,190" fill="#808080"/>
+<text x="662.8" y="185.3" fill="#eeeeee" textLength="50.4" lengthAdjust="spacingAndGlyphs">Opus 5</text>
+<polygon points="713.2,172 721.6,181.0 713.2,190" fill="#6c6c6c"/>
+<text x="730.0" y="185.3" fill="#262626" textLength="25.2" lengthAdjust="spacingAndGlyphs">max</text>
+<polygon points="763.6,172 772.0,181.0 763.6,190" fill="#eeeeee"/>
+<rect x="780.4" y="172" width="8.4" height="18" fill="#00ff00"/>
+<rect x="788.8" y="172" width="8.4" height="18" fill="#5fff00"/>
+<rect x="797.2" y="172" width="8.4" height="18" fill="#87ff00"/>
+<rect x="805.6" y="172" width="8.4" height="18" fill="#afff00"/>
+<rect x="814.0" y="172" width="8.4" height="18" fill="#d7ff00"/>
+<rect x="822.4" y="172" width="8.4" height="18" fill="#ffd700"/>
+<rect x="830.8" y="172" width="8.4" height="18" fill="#ffaf00"/>
+<rect x="839.2" y="172" width="8.4" height="18" fill="#ff8700"/>
+<rect x="847.6" y="172" width="8.4" height="18" fill="#ff5f00"/>
+<rect x="856.0" y="172" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<text x="872.8" y="185.3" fill="#eeeeee" textLength="25.2" lengthAdjust="spacingAndGlyphs">90%</text>
+<polygon points="906.4,172 914.8,181.0 906.4,190" fill="#3a3a3a"/>
+<rect x="167.2" y="208" width="142.8" height="18" fill="#5f00af"/>
+<rect x="310.0" y="208" width="168.0" height="18" fill="#005fff"/>
+<rect x="478.0" y="208" width="75.6" height="18" fill="#00ff00"/>
+<rect x="553.6" y="208" width="84.0" height="18" fill="#ff00ff"/>
+<rect x="637.6" y="208" width="58.8" height="18" fill="#ff8700"/>
+<rect x="696.4" y="208" width="142.8" height="18" fill="#3a3a3a"/>
+<text x="16.0" y="221.3" fill="#8a8a8a" textLength="33.6" lengthAdjust="spacingAndGlyphs">neon</text>
+<text x="175.6" y="221.3" fill="#ffffff" textLength="126.0" lengthAdjust="spacingAndGlyphs">dev@workstation</text>
+<polygon points="310.0,208 318.4,217.0 310.0,226" fill="#5f00af"/>
+<text x="326.8" y="221.3" fill="#ffffff" textLength="142.8" lengthAdjust="spacingAndGlyphs">~/projects/my-app</text>
+<polygon points="478.0,208 486.4,217.0 478.0,226" fill="#005fff"/>
+<g stroke="#000000" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M497.4,212 V221"/><path d="M501.4,214.4 C501.4,218 497.4,217 497.4,219.5"/><circle cx="497.4" cy="222.2" r="1.6"/><circle cx="501.4" cy="212.8" r="1.6"/></g>
+<text x="511.6" y="221.3" fill="#000000" textLength="33.6" lengthAdjust="spacingAndGlyphs">main</text>
+<polygon points="553.6,208 562.0,217.0 553.6,226" fill="#00ff00"/>
+<text x="570.4" y="221.3" fill="#ffffff" textLength="67.2" lengthAdjust="spacingAndGlyphs">Sonnet 5</text>
+<polygon points="637.6,208 646.0,217.0 637.6,226" fill="#ff00ff"/>
+<text x="654.4" y="221.3" fill="#000000" textLength="33.6" lengthAdjust="spacingAndGlyphs">high</text>
+<polygon points="696.4,208 704.8,217.0 696.4,226" fill="#ff8700"/>
+<rect x="713.2" y="208" width="8.4" height="18" fill="#00ff00"/>
+<rect x="721.6" y="208" width="8.4" height="18" fill="#5fff00"/>
+<rect x="730.0" y="208" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="738.4" y="208" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="746.8" y="208" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="755.2" y="208" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="763.6" y="208" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="772.0" y="208" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="780.4" y="208" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="788.8" y="208" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<text x="805.6" y="221.3" fill="#ffffff" textLength="25.2" lengthAdjust="spacingAndGlyphs">25%</text>
+<polygon points="839.2,208 847.6,217.0 839.2,226" fill="#3a3a3a"/>
+<rect x="167.2" y="226" width="142.8" height="18" fill="#5f00af"/>
+<rect x="310.0" y="226" width="168.0" height="18" fill="#005fff"/>
+<rect x="478.0" y="226" width="168.0" height="18" fill="#ff8700"/>
+<rect x="646.0" y="226" width="67.2" height="18" fill="#ff00ff"/>
+<rect x="713.2" y="226" width="50.4" height="18" fill="#af00ff"/>
+<rect x="763.6" y="226" width="142.8" height="18" fill="#3a3a3a"/>
+<text x="175.6" y="239.3" fill="#ffffff" textLength="126.0" lengthAdjust="spacingAndGlyphs">dev@workstation</text>
+<polygon points="310.0,226 318.4,235.0 310.0,244" fill="#5f00af"/>
+<text x="326.8" y="239.3" fill="#ffffff" textLength="142.8" lengthAdjust="spacingAndGlyphs">~/projects/webapp</text>
+<polygon points="478.0,226 486.4,235.0 478.0,244" fill="#005fff"/>
+<g stroke="#000000" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M497.4,230 V239"/><path d="M501.4,232.4 C501.4,236 497.4,235 497.4,237.5"/><circle cx="497.4" cy="240.2" r="1.6"/><circle cx="501.4" cy="230.8" r="1.6"/></g>
+<text x="511.6" y="239.3" fill="#000000" textLength="126.0" lengthAdjust="spacingAndGlyphs">feature/login ±</text>
+<polygon points="646.0,226 654.4,235.0 646.0,244" fill="#ff8700"/>
+<text x="662.8" y="239.3" fill="#ffffff" textLength="50.4" lengthAdjust="spacingAndGlyphs">Opus 5</text>
+<polygon points="713.2,226 721.6,235.0 713.2,244" fill="#ff00ff"/>
+<text x="730.0" y="239.3" fill="#000000" textLength="25.2" lengthAdjust="spacingAndGlyphs">max</text>
+<polygon points="763.6,226 772.0,235.0 763.6,244" fill="#af00ff"/>
+<rect x="780.4" y="226" width="8.4" height="18" fill="#00ff00"/>
+<rect x="788.8" y="226" width="8.4" height="18" fill="#5fff00"/>
+<rect x="797.2" y="226" width="8.4" height="18" fill="#87ff00"/>
+<rect x="805.6" y="226" width="8.4" height="18" fill="#afff00"/>
+<rect x="814.0" y="226" width="8.4" height="18" fill="#d7ff00"/>
+<rect x="822.4" y="226" width="8.4" height="18" fill="#ffd700"/>
+<rect x="830.8" y="226" width="8.4" height="18" fill="#ffaf00"/>
+<rect x="839.2" y="226" width="8.4" height="18" fill="#ff8700"/>
+<rect x="847.6" y="226" width="8.4" height="18" fill="#ff5f00"/>
+<rect x="856.0" y="226" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<text x="872.8" y="239.3" fill="#ffffff" textLength="25.2" lengthAdjust="spacingAndGlyphs">90%</text>
+<polygon points="906.4,226 914.8,235.0 906.4,244" fill="#3a3a3a"/>
+<rect x="167.2" y="262" width="142.8" height="18" fill="#4e4e4e"/>
+<rect x="310.0" y="262" width="168.0" height="18" fill="#5f5faf"/>
+<rect x="478.0" y="262" width="75.6" height="18" fill="#5fff87"/>
+<rect x="553.6" y="262" width="84.0" height="18" fill="#af87ff"/>
+<rect x="637.6" y="262" width="58.8" height="18" fill="#ffaf5f"/>
+<rect x="696.4" y="262" width="142.8" height="18" fill="#3a3a3a"/>
+<text x="16.0" y="275.3" fill="#8a8a8a" textLength="58.8" lengthAdjust="spacingAndGlyphs">dracula</text>
+<text x="175.6" y="275.3" fill="#eeeeee" textLength="126.0" lengthAdjust="spacingAndGlyphs">dev@workstation</text>
+<polygon points="310.0,262 318.4,271.0 310.0,280" fill="#4e4e4e"/>
+<text x="326.8" y="275.3" fill="#eeeeee" textLength="142.8" lengthAdjust="spacingAndGlyphs">~/projects/my-app</text>
+<polygon points="478.0,262 486.4,271.0 478.0,280" fill="#5f5faf"/>
+<g stroke="#303030" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M497.4,266 V275"/><path d="M501.4,268.4 C501.4,272 497.4,271 497.4,273.5"/><circle cx="497.4" cy="276.2" r="1.6"/><circle cx="501.4" cy="266.8" r="1.6"/></g>
+<text x="511.6" y="275.3" fill="#303030" textLength="33.6" lengthAdjust="spacingAndGlyphs">main</text>
+<polygon points="553.6,262 562.0,271.0 553.6,280" fill="#5fff87"/>
+<text x="570.4" y="275.3" fill="#303030" textLength="67.2" lengthAdjust="spacingAndGlyphs">Sonnet 5</text>
+<polygon points="637.6,262 646.0,271.0 637.6,280" fill="#af87ff"/>
+<text x="654.4" y="275.3" fill="#303030" textLength="33.6" lengthAdjust="spacingAndGlyphs">high</text>
+<polygon points="696.4,262 704.8,271.0 696.4,280" fill="#ffaf5f"/>
+<rect x="713.2" y="262" width="8.4" height="18" fill="#00ff00"/>
+<rect x="721.6" y="262" width="8.4" height="18" fill="#5fff00"/>
+<rect x="730.0" y="262" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="738.4" y="262" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="746.8" y="262" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="755.2" y="262" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="763.6" y="262" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="772.0" y="262" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="780.4" y="262" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="788.8" y="262" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<text x="805.6" y="275.3" fill="#eeeeee" textLength="25.2" lengthAdjust="spacingAndGlyphs">25%</text>
+<polygon points="839.2,262 847.6,271.0 839.2,280" fill="#3a3a3a"/>
+<rect x="167.2" y="280" width="142.8" height="18" fill="#4e4e4e"/>
+<rect x="310.0" y="280" width="168.0" height="18" fill="#5f5faf"/>
+<rect x="478.0" y="280" width="168.0" height="18" fill="#ffaf5f"/>
+<rect x="646.0" y="280" width="67.2" height="18" fill="#af87ff"/>
+<rect x="713.2" y="280" width="50.4" height="18" fill="#ff87d7"/>
+<rect x="763.6" y="280" width="142.8" height="18" fill="#3a3a3a"/>
+<text x="175.6" y="293.3" fill="#eeeeee" textLength="126.0" lengthAdjust="spacingAndGlyphs">dev@workstation</text>
+<polygon points="310.0,280 318.4,289.0 310.0,298" fill="#4e4e4e"/>
+<text x="326.8" y="293.3" fill="#eeeeee" textLength="142.8" lengthAdjust="spacingAndGlyphs">~/projects/webapp</text>
+<polygon points="478.0,280 486.4,289.0 478.0,298" fill="#5f5faf"/>
+<g stroke="#303030" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M497.4,284 V293"/><path d="M501.4,286.4 C501.4,290 497.4,289 497.4,291.5"/><circle cx="497.4" cy="294.2" r="1.6"/><circle cx="501.4" cy="284.8" r="1.6"/></g>
+<text x="511.6" y="293.3" fill="#303030" textLength="126.0" lengthAdjust="spacingAndGlyphs">feature/login ±</text>
+<polygon points="646.0,280 654.4,289.0 646.0,298" fill="#ffaf5f"/>
+<text x="662.8" y="293.3" fill="#303030" textLength="50.4" lengthAdjust="spacingAndGlyphs">Opus 5</text>
+<polygon points="713.2,280 721.6,289.0 713.2,298" fill="#af87ff"/>
+<text x="730.0" y="293.3" fill="#303030" textLength="25.2" lengthAdjust="spacingAndGlyphs">max</text>
+<polygon points="763.6,280 772.0,289.0 763.6,298" fill="#ff87d7"/>
+<rect x="780.4" y="280" width="8.4" height="18" fill="#00ff00"/>
+<rect x="788.8" y="280" width="8.4" height="18" fill="#5fff00"/>
+<rect x="797.2" y="280" width="8.4" height="18" fill="#87ff00"/>
+<rect x="805.6" y="280" width="8.4" height="18" fill="#afff00"/>
+<rect x="814.0" y="280" width="8.4" height="18" fill="#d7ff00"/>
+<rect x="822.4" y="280" width="8.4" height="18" fill="#ffd700"/>
+<rect x="830.8" y="280" width="8.4" height="18" fill="#ffaf00"/>
+<rect x="839.2" y="280" width="8.4" height="18" fill="#ff8700"/>
+<rect x="847.6" y="280" width="8.4" height="18" fill="#ff5f00"/>
+<rect x="856.0" y="280" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<text x="872.8" y="293.3" fill="#eeeeee" textLength="25.2" lengthAdjust="spacingAndGlyphs">90%</text>
+<polygon points="906.4,280 914.8,289.0 906.4,298" fill="#3a3a3a"/>
+<rect x="167.2" y="316" width="142.8" height="18" fill="#5f5f5f"/>
+<rect x="310.0" y="316" width="168.0" height="18" fill="#5f87af"/>
+<rect x="478.0" y="316" width="75.6" height="18" fill="#afd787"/>
+<rect x="553.6" y="316" width="84.0" height="18" fill="#87afd7"/>
+<rect x="637.6" y="316" width="58.8" height="18" fill="#d7875f"/>
+<rect x="696.4" y="316" width="142.8" height="18" fill="#3a3a3a"/>
+<text x="16.0" y="329.3" fill="#8a8a8a" textLength="33.6" lengthAdjust="spacingAndGlyphs">nord</text>
+<text x="175.6" y="329.3" fill="#dadada" textLength="126.0" lengthAdjust="spacingAndGlyphs">dev@workstation</text>
+<polygon points="310.0,316 318.4,325.0 310.0,334" fill="#5f5f5f"/>
+<text x="326.8" y="329.3" fill="#303030" textLength="142.8" lengthAdjust="spacingAndGlyphs">~/projects/my-app</text>
+<polygon points="478.0,316 486.4,325.0 478.0,334" fill="#5f87af"/>
+<g stroke="#303030" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M497.4,320 V329"/><path d="M501.4,322.4 C501.4,326 497.4,325 497.4,327.5"/><circle cx="497.4" cy="330.2" r="1.6"/><circle cx="501.4" cy="320.8" r="1.6"/></g>
+<text x="511.6" y="329.3" fill="#303030" textLength="33.6" lengthAdjust="spacingAndGlyphs">main</text>
+<polygon points="553.6,316 562.0,325.0 553.6,334" fill="#afd787"/>
+<text x="570.4" y="329.3" fill="#303030" textLength="67.2" lengthAdjust="spacingAndGlyphs">Sonnet 5</text>
+<polygon points="637.6,316 646.0,325.0 637.6,334" fill="#87afd7"/>
+<text x="654.4" y="329.3" fill="#303030" textLength="33.6" lengthAdjust="spacingAndGlyphs">high</text>
+<polygon points="696.4,316 704.8,325.0 696.4,334" fill="#d7875f"/>
+<rect x="713.2" y="316" width="8.4" height="18" fill="#00ff00"/>
+<rect x="721.6" y="316" width="8.4" height="18" fill="#5fff00"/>
+<rect x="730.0" y="316" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="738.4" y="316" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="746.8" y="316" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="755.2" y="316" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="763.6" y="316" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="772.0" y="316" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="780.4" y="316" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="788.8" y="316" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<text x="805.6" y="329.3" fill="#dadada" textLength="25.2" lengthAdjust="spacingAndGlyphs">25%</text>
+<polygon points="839.2,316 847.6,325.0 839.2,334" fill="#3a3a3a"/>
+<rect x="167.2" y="334" width="142.8" height="18" fill="#5f5f5f"/>
+<rect x="310.0" y="334" width="168.0" height="18" fill="#5f87af"/>
+<rect x="478.0" y="334" width="168.0" height="18" fill="#d75f5f"/>
+<rect x="646.0" y="334" width="67.2" height="18" fill="#87afd7"/>
+<rect x="713.2" y="334" width="50.4" height="18" fill="#d787d7"/>
+<rect x="763.6" y="334" width="142.8" height="18" fill="#3a3a3a"/>
+<text x="175.6" y="347.3" fill="#dadada" textLength="126.0" lengthAdjust="spacingAndGlyphs">dev@workstation</text>
+<polygon points="310.0,334 318.4,343.0 310.0,352" fill="#5f5f5f"/>
+<text x="326.8" y="347.3" fill="#303030" textLength="142.8" lengthAdjust="spacingAndGlyphs">~/projects/webapp</text>
+<polygon points="478.0,334 486.4,343.0 478.0,352" fill="#5f87af"/>
+<g stroke="#303030" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M497.4,338 V347"/><path d="M501.4,340.4 C501.4,344 497.4,343 497.4,345.5"/><circle cx="497.4" cy="348.2" r="1.6"/><circle cx="501.4" cy="338.8" r="1.6"/></g>
+<text x="511.6" y="347.3" fill="#303030" textLength="126.0" lengthAdjust="spacingAndGlyphs">feature/login ±</text>
+<polygon points="646.0,334 654.4,343.0 646.0,352" fill="#d75f5f"/>
+<text x="662.8" y="347.3" fill="#303030" textLength="50.4" lengthAdjust="spacingAndGlyphs">Opus 5</text>
+<polygon points="713.2,334 721.6,343.0 713.2,352" fill="#87afd7"/>
+<text x="730.0" y="347.3" fill="#303030" textLength="25.2" lengthAdjust="spacingAndGlyphs">max</text>
+<polygon points="763.6,334 772.0,343.0 763.6,352" fill="#d787d7"/>
+<rect x="780.4" y="334" width="8.4" height="18" fill="#00ff00"/>
+<rect x="788.8" y="334" width="8.4" height="18" fill="#5fff00"/>
+<rect x="797.2" y="334" width="8.4" height="18" fill="#87ff00"/>
+<rect x="805.6" y="334" width="8.4" height="18" fill="#afff00"/>
+<rect x="814.0" y="334" width="8.4" height="18" fill="#d7ff00"/>
+<rect x="822.4" y="334" width="8.4" height="18" fill="#ffd700"/>
+<rect x="830.8" y="334" width="8.4" height="18" fill="#ffaf00"/>
+<rect x="839.2" y="334" width="8.4" height="18" fill="#ff8700"/>
+<rect x="847.6" y="334" width="8.4" height="18" fill="#ff5f00"/>
+<rect x="856.0" y="334" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<text x="872.8" y="347.3" fill="#dadada" textLength="25.2" lengthAdjust="spacingAndGlyphs">90%</text>
+<polygon points="906.4,334 914.8,343.0 906.4,352" fill="#3a3a3a"/>
+<rect x="167.2" y="370" width="142.8" height="18" fill="#3a3a3a"/>
+<rect x="310.0" y="370" width="168.0" height="18" fill="#5f8787"/>
+<rect x="478.0" y="370" width="75.6" height="18" fill="#878700"/>
+<rect x="553.6" y="370" width="84.0" height="18" fill="#af5f87"/>
+<rect x="637.6" y="370" width="58.8" height="18" fill="#d75f00"/>
+<rect x="696.4" y="370" width="142.8" height="18" fill="#3a3a3a"/>
+<text x="16.0" y="383.3" fill="#8a8a8a" textLength="58.8" lengthAdjust="spacingAndGlyphs">gruvbox</text>
+<text x="175.6" y="383.3" fill="#ffd7af" textLength="126.0" lengthAdjust="spacingAndGlyphs">dev@workstation</text>
+<polygon points="310.0,370 318.4,379.0 310.0,388" fill="#3a3a3a"/>
+<text x="326.8" y="383.3" fill="#ffffd7" textLength="142.8" lengthAdjust="spacingAndGlyphs">~/projects/my-app</text>
+<polygon points="478.0,370 486.4,379.0 478.0,388" fill="#5f8787"/>
+<g stroke="#ffffd7" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M497.4,374 V383"/><path d="M501.4,376.4 C501.4,380 497.4,379 497.4,381.5"/><circle cx="497.4" cy="384.2" r="1.6"/><circle cx="501.4" cy="374.8" r="1.6"/></g>
+<text x="511.6" y="383.3" fill="#ffffd7" textLength="33.6" lengthAdjust="spacingAndGlyphs">main</text>
+<polygon points="553.6,370 562.0,379.0 553.6,388" fill="#878700"/>
+<text x="570.4" y="383.3" fill="#ffffd7" textLength="67.2" lengthAdjust="spacingAndGlyphs">Sonnet 5</text>
+<polygon points="637.6,370 646.0,379.0 637.6,388" fill="#af5f87"/>
+<text x="654.4" y="383.3" fill="#ffffd7" textLength="33.6" lengthAdjust="spacingAndGlyphs">high</text>
+<polygon points="696.4,370 704.8,379.0 696.4,388" fill="#d75f00"/>
+<rect x="713.2" y="370" width="8.4" height="18" fill="#00ff00"/>
+<rect x="721.6" y="370" width="8.4" height="18" fill="#5fff00"/>
+<rect x="730.0" y="370" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="738.4" y="370" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="746.8" y="370" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="755.2" y="370" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="763.6" y="370" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="772.0" y="370" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="780.4" y="370" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<rect x="788.8" y="370" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<text x="805.6" y="383.3" fill="#ffffd7" textLength="25.2" lengthAdjust="spacingAndGlyphs">25%</text>
+<polygon points="839.2,370 847.6,379.0 839.2,388" fill="#3a3a3a"/>
+<rect x="167.2" y="388" width="142.8" height="18" fill="#3a3a3a"/>
+<rect x="310.0" y="388" width="168.0" height="18" fill="#5f8787"/>
+<rect x="478.0" y="388" width="168.0" height="18" fill="#af0000"/>
+<rect x="646.0" y="388" width="117.6" height="18" fill="#af5f87"/>
+<rect x="763.6" y="388" width="142.8" height="18" fill="#3a3a3a"/>
+<text x="175.6" y="401.3" fill="#ffd7af" textLength="126.0" lengthAdjust="spacingAndGlyphs">dev@workstation</text>
+<polygon points="310.0,388 318.4,397.0 310.0,406" fill="#3a3a3a"/>
+<text x="326.8" y="401.3" fill="#ffffd7" textLength="142.8" lengthAdjust="spacingAndGlyphs">~/projects/webapp</text>
+<polygon points="478.0,388 486.4,397.0 478.0,406" fill="#5f8787"/>
+<g stroke="#ffffd7" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M497.4,392 V401"/><path d="M501.4,394.4 C501.4,398 497.4,397 497.4,399.5"/><circle cx="497.4" cy="402.2" r="1.6"/><circle cx="501.4" cy="392.8" r="1.6"/></g>
+<text x="511.6" y="401.3" fill="#ffffd7" textLength="126.0" lengthAdjust="spacingAndGlyphs">feature/login ±</text>
+<polygon points="646.0,388 654.4,397.0 646.0,406" fill="#af0000"/>
+<text x="662.8" y="401.3" fill="#ffffd7" textLength="50.4" lengthAdjust="spacingAndGlyphs">Opus 5</text>
+<polygon points="713.2,388 721.6,397.0 713.2,406" fill="#af5f87"/>
+<text x="730.0" y="401.3" fill="#ffffd7" textLength="25.2" lengthAdjust="spacingAndGlyphs">max</text>
+<polygon points="763.6,388 772.0,397.0 763.6,406" fill="#af5f87"/>
+<rect x="780.4" y="388" width="8.4" height="18" fill="#00ff00"/>
+<rect x="788.8" y="388" width="8.4" height="18" fill="#5fff00"/>
+<rect x="797.2" y="388" width="8.4" height="18" fill="#87ff00"/>
+<rect x="805.6" y="388" width="8.4" height="18" fill="#afff00"/>
+<rect x="814.0" y="388" width="8.4" height="18" fill="#d7ff00"/>
+<rect x="822.4" y="388" width="8.4" height="18" fill="#ffd700"/>
+<rect x="830.8" y="388" width="8.4" height="18" fill="#ffaf00"/>
+<rect x="839.2" y="388" width="8.4" height="18" fill="#ff8700"/>
+<rect x="847.6" y="388" width="8.4" height="18" fill="#ff5f00"/>
+<rect x="856.0" y="388" width="8.4" height="18" fill="url(#shade1c1c1c)"/>
+<text x="872.8" y="401.3" fill="#ffffd7" textLength="25.2" lengthAdjust="spacingAndGlyphs">90%</text>
+<polygon points="906.4,388 914.8,397.0 906.4,406" fill="#3a3a3a"/>
+<rect x="167.2" y="424" width="142.8" height="18" fill="#262626"/>
+<rect x="478.0" y="424" width="75.6" height="18" fill="#5f8700"/>
+<rect x="553.6" y="424" width="84.0" height="18" fill="#0087ff"/>
+<rect x="637.6" y="424" width="58.8" height="18" fill="#d75f00"/>
+<rect x="696.4" y="424" width="142.8" height="18" fill="#262626"/>
+<text x="16.0" y="437.3" fill="#8a8a8a" textLength="75.6" lengthAdjust="spacingAndGlyphs">solarized</text>
+<text x="175.6" y="437.3" fill="#808080" textLength="126.0" lengthAdjust="spacingAndGlyphs">dev@workstation</text>
+<polygon points="310.0,424 318.4,433.0 310.0,442" fill="#262626"/>
+<text x="326.8" y="437.3" fill="#808080" textLength="142.8" lengthAdjust="spacingAndGlyphs">~/projects/my-app</text>
+<polygon points="478.0,424 486.4,433.0 478.0,442" fill="#1c1c1c"/>
+<g stroke="#ffffd7" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M497.4,428 V437"/><path d="M501.4,430.4 C501.4,434 497.4,433 497.4,435.5"/><circle cx="497.4" cy="438.2" r="1.6"/><circle cx="501.4" cy="428.8" r="1.6"/></g>
+<text x="511.6" y="437.3" fill="#ffffd7" textLength="33.6" lengthAdjust="spacingAndGlyphs">main</text>
+<polygon points="553.6,424 562.0,433.0 553.6,442" fill="#5f8700"/>
+<text x="570.4" y="437.3" fill="#ffffd7" textLength="67.2" lengthAdjust="spacingAndGlyphs">Sonnet 5</text>
+<polygon points="637.6,424 646.0,433.0 637.6,442" fill="#0087ff"/>
+<text x="654.4" y="437.3" fill="#ffffd7" textLength="33.6" lengthAdjust="spacingAndGlyphs">high</text>
+<polygon points="696.4,424 704.8,433.0 696.4,442" fill="#d75f00"/>
+<rect x="713.2" y="424" width="8.4" height="18" fill="#00ff00"/>
+<rect x="721.6" y="424" width="8.4" height="18" fill="#5fff00"/>
+<rect x="730.0" y="424" width="8.4" height="18" fill="url(#shade444444)"/>
+<rect x="738.4" y="424" width="8.4" height="18" fill="url(#shade444444)"/>
+<rect x="746.8" y="424" width="8.4" height="18" fill="url(#shade444444)"/>
+<rect x="755.2" y="424" width="8.4" height="18" fill="url(#shade444444)"/>
+<rect x="763.6" y="424" width="8.4" height="18" fill="url(#shade444444)"/>
+<rect x="772.0" y="424" width="8.4" height="18" fill="url(#shade444444)"/>
+<rect x="780.4" y="424" width="8.4" height="18" fill="url(#shade444444)"/>
+<rect x="788.8" y="424" width="8.4" height="18" fill="url(#shade444444)"/>
+<text x="805.6" y="437.3" fill="#ffffd7" textLength="25.2" lengthAdjust="spacingAndGlyphs">25%</text>
+<polygon points="839.2,424 847.6,433.0 839.2,442" fill="#262626"/>
+<rect x="167.2" y="442" width="142.8" height="18" fill="#262626"/>
+<rect x="478.0" y="442" width="168.0" height="18" fill="#d70000"/>
+<rect x="646.0" y="442" width="67.2" height="18" fill="#0087ff"/>
+<rect x="713.2" y="442" width="50.4" height="18" fill="#af005f"/>
+<rect x="763.6" y="442" width="142.8" height="18" fill="#262626"/>
+<text x="175.6" y="455.3" fill="#808080" textLength="126.0" lengthAdjust="spacingAndGlyphs">dev@workstation</text>
+<polygon points="310.0,442 318.4,451.0 310.0,460" fill="#262626"/>
+<text x="326.8" y="455.3" fill="#808080" textLength="142.8" lengthAdjust="spacingAndGlyphs">~/projects/webapp</text>
+<polygon points="478.0,442 486.4,451.0 478.0,460" fill="#1c1c1c"/>
+<g stroke="#ffffd7" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M497.4,446 V455"/><path d="M501.4,448.4 C501.4,452 497.4,451 497.4,453.5"/><circle cx="497.4" cy="456.2" r="1.6"/><circle cx="501.4" cy="446.8" r="1.6"/></g>
+<text x="511.6" y="455.3" fill="#ffffd7" textLength="126.0" lengthAdjust="spacingAndGlyphs">feature/login ±</text>
+<polygon points="646.0,442 654.4,451.0 646.0,460" fill="#d70000"/>
+<text x="662.8" y="455.3" fill="#ffffd7" textLength="50.4" lengthAdjust="spacingAndGlyphs">Opus 5</text>
+<polygon points="713.2,442 721.6,451.0 713.2,460" fill="#0087ff"/>
+<text x="730.0" y="455.3" fill="#ffffd7" textLength="25.2" lengthAdjust="spacingAndGlyphs">max</text>
+<polygon points="763.6,442 772.0,451.0 763.6,460" fill="#af005f"/>
+<rect x="780.4" y="442" width="8.4" height="18" fill="#00ff00"/>
+<rect x="788.8" y="442" width="8.4" height="18" fill="#5fff00"/>
+<rect x="797.2" y="442" width="8.4" height="18" fill="#87ff00"/>
+<rect x="805.6" y="442" width="8.4" height="18" fill="#afff00"/>
+<rect x="814.0" y="442" width="8.4" height="18" fill="#d7ff00"/>
+<rect x="822.4" y="442" width="8.4" height="18" fill="#ffd700"/>
+<rect x="830.8" y="442" width="8.4" height="18" fill="#ffaf00"/>
+<rect x="839.2" y="442" width="8.4" height="18" fill="#ff8700"/>
+<rect x="847.6" y="442" width="8.4" height="18" fill="#ff5f00"/>
+<rect x="856.0" y="442" width="8.4" height="18" fill="url(#shade444444)"/>
+<text x="872.8" y="455.3" fill="#ffffd7" textLength="25.2" lengthAdjust="spacingAndGlyphs">90%</text>
+<polygon points="906.4,442 914.8,451.0 906.4,460" fill="#262626"/>
+</svg>
