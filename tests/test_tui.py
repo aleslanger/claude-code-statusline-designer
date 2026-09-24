@@ -5,8 +5,6 @@ would actually see -- characters and their colors -- not internal state.
 """
 from __future__ import annotations
 
-import getpass
-
 import pytest
 
 from claude_style.palette import to_hex
@@ -17,6 +15,7 @@ from tty_session import (
     CTRL_C,
     DOWN,
     ENTER,
+    FAKE_USER,
     LEFT,
     RIGHT,
     TuiSession,
@@ -77,9 +76,10 @@ def test_preview_colors_stay_correct_after_hovering_many_palette_colors(tui):
     # preview pairs for every hovered color) later screens showed wrong colors.
     _open_dir_color_editor(tui)
     tui.send(ENTER)
-    tui.send(RIGHT * HOVER_SWEEP, max_wait=SWEEP_MAX_WAIT_S)
-
     hovered = DIR_BG_DEFAULT + HOVER_SWEEP
+    tui.send(RIGHT * HOVER_SWEEP, max_wait=0)
+    tui.wait_for(f"code {hovered} ", max_wait=SWEEP_MAX_WAIT_S)  # the palette's info line
+
     assert tui.bg_of(tui.preview_row(), "my-app") == _pyte_bg(hovered)
 
     tui.send("q")  # cancel palette
@@ -87,7 +87,7 @@ def test_preview_colors_stay_correct_after_hovering_many_palette_colors(tui):
 
     row = tui.preview_row()
     assert tui.bg_of(row, "my-app") == _pyte_bg(DIR_BG_DEFAULT)
-    assert tui.bg_of(row, f"{getpass.getuser()}@") == _pyte_bg(USER_HOST_BG_DEFAULT)
+    assert tui.bg_of(row, f"{FAKE_USER}@") == _pyte_bg(USER_HOST_BG_DEFAULT)
 
 
 def test_toggling_a_segment_updates_preview_without_leaving_the_menu(tui):

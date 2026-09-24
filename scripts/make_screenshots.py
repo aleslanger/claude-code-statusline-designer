@@ -21,7 +21,7 @@ from xml.sax.saxutils import escape
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT), str(ROOT / "tests")]
 
-from tty_session import DOWN, ENTER, RIGHT, TuiSession
+from tty_session import DOWN, ENTER, RIGHT, TuiSession, fake_identity_bin
 
 from claude_style.ansi import DEFAULT, parse
 from claude_style.palette import to_hex
@@ -30,7 +30,6 @@ from claude_style.preview import SAMPLES, run_samples
 from claude_style.schemes import scheme_config
 
 DOCS = ROOT / "docs"
-FAKE_USER, FAKE_HOST = "dev", "workstation"  # keep real account names out of public images
 STATUSLINE_COLUMNS = 120
 LABEL_WIDTH = 18
 MENU_ROWS, MENU_COLS = 30, 96
@@ -238,12 +237,8 @@ def svg(rows: list[list[Cell]], theme: Theme, title: str) -> str:
 # --- main ------------------------------------------------------------------
 
 def _fake_identity() -> None:
-    bin_dir = Path(tempfile.mkdtemp(prefix="claude-style-shots-"))
-    for name, value in (("whoami", FAKE_USER), ("hostname", FAKE_HOST)):
-        tool = bin_dir / name
-        tool.write_text(f"#!/bin/sh\necho {value}\n", encoding="utf-8")
-        tool.chmod(0o755)
-    os.environ["PATH"] = f"{bin_dir}{os.pathsep}{os.environ['PATH']}"
+    """Placeholder dev@workstation, so no real account or host names end up in public images."""
+    os.environ["PATH"] = f"{fake_identity_bin()}{os.pathsep}{os.environ['PATH']}"
 
 
 def _menu_shots() -> dict[str, list[list[Cell]]]:
