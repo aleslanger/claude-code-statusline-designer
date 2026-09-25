@@ -112,4 +112,43 @@ LIGHT_PRESETS = {
         },
         extras((125, 230), cost(235, 229, 224), (254, 241)),
     ),
+    "catppuccin-light": preset(  # Latte
+        "catppuccin-light",
+        "powerline",
+        {
+            "user_host": seg(254, 60),
+            "dir": seg(27, 231),
+            "git": git(64, 166, 231),
+            "model": seg(98, 231),
+            "effort": effort(231, 64, 136, 166, 161, 98, 60),
+            "context": context(235, (151, 229, 217), **LIGHT_BAR),
+        },
+        extras((98, 231), cost(235, 229, 217), (253, 60)),
+    ),
+    "tokyo-night-light": preset(  # Tokyo Night Day
+        "tokyo-night-light",
+        "powerline",
+        {
+            "user_host": seg(254, 25),
+            "dir": seg(33, 231),
+            "git": git(64, 130, 231),
+            "model": seg(98, 231),
+            "effort": effort(231, 64, 94, 130, 161, 98, 60),
+            "context": context(235, (151, 223, 217), **LIGHT_BAR),
+        },
+        extras((24, 231), cost(235, 223, 217), (254, 25)),
+    ),
+    "onedark-light": preset(  # One Light
+        "onedark-light",
+        "powerline",
+        {
+            "user_host": seg(254, 237),
+            "dir": seg(33, 231),
+            "git": git(71, 136, 235),
+            "model": seg(127, 231),
+            "effort": effort(235, 71, 179, 173, 167, 176, 250),
+            "context": context(235, (151, 229, 217), **LIGHT_BAR),
+        },
+        extras((31, 231), cost(235, 229, 217), (254, 237)),
+    ),
 }

@@ -26,9 +26,11 @@ import pyte
 ROWS, COLS = 30, 100
 DOWN, UP, RIGHT, LEFT = "\x1bOB", "\x1bOA", "\x1bOC", "\x1bOD"  # application-cursor-mode arrows, as curses enables them
 ENTER, CTRL_C = "\r", "\x03"
-QUIET_S = 0.25
+QUIET_S = 0.4  # gap that ends a frame; curses writes each frame in one burst
 POLL_S = 0.05
 MAX_WAIT_S = 5.0
+STARTUP_WAIT_S = 20.0
+READY_TEXT = "LIVE PREVIEW"  # drawn last-ish in the first frame, after the menu and the preview
 FAKE_USER, FAKE_HOST = "dev", "workstation"
 SELECTED_MARK = "▸ "
 MAX_ROWS_TO_SCAN = 40
@@ -90,7 +92,9 @@ class TuiSession:
             os.chdir(PROJECT_ROOT)
             os.execvpe(sys.executable, [sys.executable, "-m", "claude_style", "menu"], child_env)
         fcntl.ioctl(self.fd, termios.TIOCSWINSZ, struct.pack("HHHH", rows, cols, 0, 0))
-        self.settle()
+        # Startup (imports, first preview render) is silent for a while; a "quiet
+        # moment" check alone would return before the first frame is drawn.
+        self.wait_for(READY_TEXT, max_wait=STARTUP_WAIT_S)
 
     def _pump(self, timeout: float) -> bool:
         """Feeds one chunk of output into the emulator. False when nothing arrived (or the program exited)."""
@@ -106,9 +110,17 @@ class TuiSession:
         self.stream.feed(chunk)
         return True
 
-    def settle(self, max_wait: float = MAX_WAIT_S) -> None:
-        """Feed output into the emulator until the program has been quiet for a moment."""
+    def settle(self, max_wait: float = MAX_WAIT_S, expect_output: bool = False) -> None:
+        """Feed output into the emulator until the program has been quiet for a moment.
+
+        With expect_output, first wait for the redraw to start: on a loaded
+        machine a key press can take longer than QUIET_S to produce any output,
+        and a quiet check alone would then look at the previous frame.
+        """
         deadline = time.time() + max_wait
+        if expect_output:
+            while time.time() < deadline and not self._pump(POLL_S):
+                pass
         last_output = time.time()
         while time.time() < deadline and time.time() - last_output < QUIET_S:
             if self._pump(POLL_S):
@@ -126,7 +138,7 @@ class TuiSession:
 
     def send(self, keys: str, max_wait: float = MAX_WAIT_S) -> None:
         os.write(self.fd, keys.encode())
-        self.settle(max_wait)
+        self.settle(max_wait, expect_output=True)
 
     def selected_line(self) -> str:
         return next((line for line in self.screen.display if SELECTED_MARK in line), "")

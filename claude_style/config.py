@@ -91,6 +91,7 @@ DEFAULT_CONFIG = {
     "preset": "agnoster",
     "based_on": None,  # scheme a "custom" config was derived from; what Reset returns to
     "separator": "powerline",  # "powerline" or "plain"
+    "glyphs": "nerdfont",  # "nerdfont", "unicode" (no Nerd Font needed) or "ascii"
     "segments": {
         "user_host": {"enabled": True, "bg": 236, "fg": 250},
         "dir": {
@@ -130,6 +131,11 @@ DEFAULT_CONFIG = {
             "bar_bg": 238,  # segment background behind the true-color gradient bar
             "bar_empty": 235,  # unfilled bar blocks: a shade darker than bar_bg reads as "recessed"
             "gradient_peak": 255,  # brightest gradient channel; ~180 keeps it readable on light terminals
+            # A word naming how full the context is, shown before the bar.
+            # Idea and default labels/thresholds from Dumbometer (MIT) by Maximo Correa Rosas.
+            "state_word": False,
+            "state_labels": ["Smart", "Coasting", "Foggy", "Cooked", "Dumb"],
+            "state_thresholds": [25, 50, 70, 90],  # usage % where labels 2-5 start
         },
         "output_style": {
             "enabled": False,

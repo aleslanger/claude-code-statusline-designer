@@ -17,6 +17,7 @@ from claude_style.config import (
     save_config,
     set_color,
 )
+from claude_style.glyphs import GLYPH_MODE_LABELS, GLYPH_MODES
 from claude_style.installer import STATUSLINE_PATH, InstallError, install, uninstall
 from claude_style.palette import parse_color, to_hex
 from claude_style.presets import PRESETS
@@ -34,6 +35,7 @@ from claude_style.schemes import (
 from claude_style.validate import ConfigError
 
 DISTRIBUTION = "claude-code-statusline-designer"
+CONTEXT_WORD_TOGGLE = "context-word"  # `toggle context-word on` = the Smart -> Dumb mood word
 EXIT_OK = 0
 EXIT_ERROR = 1
 EXIT_INTERRUPTED = 130  # shell convention: 128 + SIGINT
@@ -50,6 +52,9 @@ def _print_menu(config: dict, installed: bool) -> None:
         print(f"  {i}. [{state}] {SEGMENT_LABELS[key]}")
     print("\n  p. choose a scheme (shows a preview of each)")
     print("  s. toggle separator style (powerline/plain)")
+    print(f"  g. cycle glyphs (now: {config['glyphs']} - {GLYPH_MODE_LABELS[config['glyphs']]})")
+    word = "on" if config["segments"]["context"]["state_word"] else "off"
+    print(f"  o. context mood word Smart -> Dumb (now: {word})")
     print("  c. edit a segment's individual colors")
     print("  w. save current look as your own scheme")
     print("  x. export current look to a file")
@@ -182,6 +187,14 @@ def _classic_action(choice: str, config: dict) -> dict:
         config = _import_classic(config)
     elif choice == "r":
         config = _reset_classic(config)
+    elif choice == "g":
+        modes = list(GLYPH_MODES)
+        config["glyphs"] = modes[(modes.index(config["glyphs"]) + 1) % len(modes)]
+        preview(config)
+    elif choice == "o":
+        ctx = config["segments"]["context"]
+        ctx["state_word"] = not ctx["state_word"]
+        preview(config)
     elif choice.isdigit() and 1 <= int(choice) <= len(SEGMENT_ORDER):
         key = SEGMENT_ORDER[int(choice) - 1]
         config["segments"][key]["enabled"] = not config["segments"][key]["enabled"]
@@ -245,8 +258,11 @@ def build_parser() -> argparse.ArgumentParser:
     p_preset.add_argument("name", help="see 'claude-style presets'")
 
     p_toggle = sub.add_parser("toggle", help="enable/disable a segment")
-    p_toggle.add_argument("segment", choices=SEGMENT_ORDER)
+    p_toggle.add_argument("segment", choices=[*SEGMENT_ORDER, CONTEXT_WORD_TOGGLE])
     p_toggle.add_argument("state", choices=["on", "off"])
+
+    p_glyphs = sub.add_parser("glyphs", help="glyph set: nerdfont, unicode (no Nerd Font needed) or ascii")
+    p_glyphs.add_argument("mode", choices=list(GLYPH_MODES))
 
     p_sep = sub.add_parser("separator", help="set separator style")
     p_sep.add_argument("style", choices=["powerline", "plain"])
@@ -341,9 +357,16 @@ def _dispatch(argv) -> None:
         save_config(scheme_config(args.name))
         print(f"scheme set to {args.name}. Run 'claude-style install' to apply it.")
     elif args.command == "toggle":
-        config["segments"][args.segment]["enabled"] = args.state == "on"
+        if args.segment == CONTEXT_WORD_TOGGLE:
+            config["segments"]["context"]["state_word"] = args.state == "on"
+        else:
+            config["segments"][args.segment]["enabled"] = args.state == "on"
         save_config(config)
         print(f"{args.segment} -> {args.state}")
+    elif args.command == "glyphs":
+        config["glyphs"] = args.mode
+        save_config(config)
+        print(f"glyphs -> {args.mode} ({GLYPH_MODE_LABELS[args.mode]})")
     elif args.command == "separator":
         config["separator"] = args.style
         save_config(config)

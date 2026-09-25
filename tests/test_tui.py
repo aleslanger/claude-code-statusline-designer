@@ -98,6 +98,24 @@ def test_toggling_a_segment_updates_preview_without_leaving_the_menu(tui):
     assert "Preview (press Enter" not in tui.screen_text()
 
 
+def test_glyphs_row_switches_the_preview_to_ascii(tui):
+    tui.select_row("Glyphs")
+    tui.send(RIGHT)  # nerdfont -> unicode
+    tui.send(RIGHT)  # unicode -> ascii
+
+    assert "ascii" in tui.selected_line()
+    assert "#########." in tui.screen.display[tui.preview_row() + 1]
+
+
+def test_context_mood_word_toggle_shows_in_the_preview(tui):
+    tui.select_row("context mood word")
+    tui.send(" ")
+
+    row = tui.preview_row()
+    assert "Coasting" in tui.screen.display[row]
+    assert "Dumb" in tui.screen.display[row + 1]
+
+
 def test_r_in_color_editor_resets_the_field_and_clears_unsaved(tui):
     _open_dir_color_editor(tui)
     tui.send(RIGHT)

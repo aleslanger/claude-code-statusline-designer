@@ -1,4 +1,5 @@
 """Render a Claude Code Statusline Designer config into a Claude Code statusline bash script."""
+from claude_style.glyphs import glyph_definitions
 from claude_style.validate import validate_config
 
 HEADER = """#!/usr/bin/env bash
@@ -61,9 +62,8 @@ gradient_rgb() {{
 """
 
 POWERLINE_HELPERS = """
-SEP=$'\\ue0b0'
-sep() { fg "$1"; bg "$2"; printf '%s' "$SEP"; }
-sep_end() { fg "$1"; printf '\\033[49m%s%s' "$SEP" "$RESET"; }
+sep() { fg "$1"; bg "$2"; printf '%s' "$G_SEP"; }
+sep_end() { fg "$1"; printf '\\033[49m%s%s' "$G_SEP" "$RESET"; }
 prev=""
 """
 
@@ -134,6 +134,90 @@ def _context_color_logic(context_cfg: dict) -> str:
     return "\n".join(lines)
 
 
+def _git_segment(c: dict, powerline: bool) -> list[str]:
+    lines = ['if [ -n "$branch" ]; then']
+    if powerline:
+        lines += [
+            f'  if [ -n "$git_status" ]; then next={c["bg_dirty"]}; dirty_glyph="$G_DIRTY"',
+            f'  else next={c["bg_clean"]}; dirty_glyph=""; fi',
+            '  sep "$prev" "$next"',
+            f'  fg {c["fg"]}',
+            '  printf " %s%s%s " "$G_BRANCH" "$branch" "$dirty_glyph"',
+            "  prev=$next",
+        ]
+    else:
+        lines += [
+            "  plain_join",
+            f'  if [ -n "$git_status" ]; then fg {c["bg_dirty"]}; dirty_glyph="$G_DIRTY"',
+            f'  else fg {c["bg_clean"]}; dirty_glyph=""; fi',
+            '  printf "%s%s%s" "$G_BRANCH" "$branch" "$dirty_glyph"; printf "$RESET"',
+        ]
+    return lines + ["fi"]
+
+
+def _tint(pct_expr: str, fallback_fg: str) -> str:
+    """Gradient color for pct_expr on true-color terminals, the threshold fallback otherwise."""
+    return (
+        f'  if [ "$CTX_TRUECOLOR" = "1" ]; then gradient_rgb {pct_expr}; fg "rgb:${{GR}},${{GG}},${{GB}}"; '
+        f"else fg {fallback_fg}; fi"
+    )
+
+
+def _state_word(ctx: dict, fallback_fg: str, powerline: bool) -> list[str]:
+    labels, limits = ctx["state_labels"], ctx["state_thresholds"]
+    lines = [f'  if [ "$used_int" -lt {limits[0]} ]; then ctx_word="{labels[0]}"']
+    lines += [f'  elif [ "$used_int" -lt {limit} ]; then ctx_word="{label}"' for limit, label in zip(limits[1:], labels[1:])]
+    lines.append(f'  else ctx_word="{labels[-1]}"; fi')
+    lines.append(_tint('"$used_int"', fallback_fg))
+    lines.append('  printf " %s" "$ctx_word"' if powerline else '  printf "%s" "$ctx_word"')
+    return lines
+
+
+def _context_bar(ctx: dict, fallback_fg: str, powerline: bool) -> list[str]:
+    # plain_join already ends with a space; only pad after a segment edge or the state word.
+    lead = ['  printf " "'] if powerline or ctx["state_word"] else []
+    return [
+        '  filled=$(( used_int / 10 )); [ "$filled" -gt 10 ] && filled=10',
+        *lead,
+        "  for i in $(seq 1 10); do",
+        '    if [ "$i" -le "$filled" ]; then',
+        "  " + _tint("$(( i * 10 - 5 ))", fallback_fg),
+        "      printf '%s' \"$G_FULL\"",
+        "    else",
+        f"      fg {ctx['bar_empty']}; printf '%s' \"$G_EMPTY\"",
+        "    fi",
+        "  done",
+        f'  fg {ctx["fg"]}',
+        '  printf " %d%% " "$used_int"' if powerline else '  printf " %d%%" "$used_int"; printf "$RESET"',
+    ]
+
+
+def _context_percent(ctx: dict, fallback_fg: str, powerline: bool) -> list[str]:
+    # With the state word already printed, it replaces the "ctx" label.
+    has_word = ctx["state_word"]
+    if powerline:
+        text = f'  printf " {"" if has_word else "ctx "}%d%% " "$used_int"'
+    else:
+        text = f'  printf "{" " if has_word else "ctx "}%d%%" "$used_int"; printf "$RESET"'
+    return [_tint('"$used_int"', fallback_fg), text]
+
+
+def _context_segment(ctx: dict, powerline: bool) -> list[str]:
+    # Without true color: in powerline mode the threshold color is the segment
+    # background, so bar and word use the text color; in plain mode there is no
+    # background, so the threshold color itself is drawn.
+    fallback_fg = ctx["fg"] if powerline else '"$C_CTX"'
+    lines = ['if [ -n "$used" ]; then']
+    lines += ['  sep "$prev" "$C_CTX"', f'  fg {ctx["fg"]}'] if powerline else ["  plain_join", '  fg "$C_CTX"']
+    if ctx["state_word"]:
+        lines += _state_word(ctx, fallback_fg, powerline)
+    body = _context_bar if ctx["style"] == "bar" else _context_percent
+    lines += body(ctx, fallback_fg, powerline)
+    if powerline:
+        lines.append("  prev=$C_CTX")
+    return lines + ["fi"]
+
+
 def render(config: dict) -> str:
     validate_config(config)
     seg = config["segments"]
@@ -141,6 +225,7 @@ def render(config: dict) -> str:
     powerline = separator == "powerline"
 
     parts = [HEADER.format(preset=config.get("preset", "custom"), separator=separator)]
+    parts.append(glyph_definitions(config["glyphs"]))
     parts.append(POWERLINE_HELPERS if powerline else PLAIN_HELPERS)
 
     if seg["effort"]["enabled"]:
@@ -175,29 +260,8 @@ def render(config: dict) -> str:
             body.append('plain_join')
             body.append(f'fg {c["fg"]}; printf "%s" "$short_dir"; printf "$RESET"')
 
-    # --- git ---
     if seg["git"]["enabled"]:
-        c = seg["git"]
-        body.append('if [ -n "$branch" ]; then')
-        if powerline:
-            body.append('  if [ -n "$git_status" ]; then')
-            body.append(f'    next={c["bg_dirty"]}; dirty_glyph=" \\xc2\\xb1"')
-            body.append('  else')
-            body.append(f'    next={c["bg_clean"]}; dirty_glyph=""')
-            body.append('  fi')
-            body.append('  sep "$prev" "$next"')
-            body.append(f'  fg {c["fg"]}')
-            body.append('  printf " \\xef\\x90\\x9c %s%b " "$branch" "$dirty_glyph"')
-            body.append('  prev=$next')
-        else:
-            body.append('  plain_join')
-            body.append('  if [ -n "$git_status" ]; then')
-            body.append(f'    fg {c["bg_dirty"]}')
-            body.append('  else')
-            body.append(f'    fg {c["bg_clean"]}')
-            body.append('  fi')
-            body.append('  printf "\\xef\\x90\\x9c %s" "$branch"; printf "$RESET"')
-        body.append('fi')
+        body += _git_segment(seg["git"], powerline)
 
     # --- model + effort ---
     if seg["model"]["enabled"]:
@@ -240,55 +304,8 @@ def render(config: dict) -> str:
             body.append(f'  fg {c["fg"]}; printf "style:%s" "$outstyle"; printf "$RESET"')
         body.append('fi')
 
-    # --- context usage ---
     if seg["context"]["enabled"]:
-        style = seg["context"].get("style", "bar")
-        cf = seg["context"]["fg"]
-        empty_fg = seg["context"]["bar_empty"]
-        # Without true color: in powerline mode the threshold color is the segment
-        # background, so the bar/number uses the text color; in plain mode there is
-        # no background, so the threshold color itself is drawn.
-        fallback_fg = cf if powerline else '"$C_CTX"'
-        body.append('if [ -n "$used" ]; then')
-        if powerline:
-            body.append('  sep "$prev" "$C_CTX"')
-            body.append(f'  fg {cf}')
-        else:
-            body.append('  plain_join')
-            body.append('  fg "$C_CTX"')
-        if style == "bar":
-            body.append('  filled=$(( used_int / 10 )); [ "$filled" -gt 10 ] && filled=10')
-            body.append('  printf " "')
-            body.append('  for i in $(seq 1 10); do')
-            body.append('    if [ "$i" -le "$filled" ]; then')
-            body.append('      if [ "$CTX_TRUECOLOR" = "1" ]; then')
-            body.append('        gradient_rgb $(( i * 10 - 5 )); fg "rgb:${GR},${GG},${GB}"')
-            body.append('      else')
-            body.append(f'        fg {fallback_fg}')
-            body.append('      fi')
-            body.append('      printf "\\xe2\\x96\\x88"')
-            body.append('    else')
-            body.append(f'      fg {empty_fg}; printf "\\xe2\\x96\\x91"')
-            body.append('    fi')
-            body.append('  done')
-            body.append(f'  fg {cf}')
-            if powerline:
-                body.append('  printf " %d%% " "$used_int"')
-            else:
-                body.append('  printf " %d%%" "$used_int"; printf "$RESET"')
-        else:
-            body.append('  if [ "$CTX_TRUECOLOR" = "1" ]; then')
-            body.append('    gradient_rgb "$used_int"; fg "rgb:${GR},${GG},${GB}"')
-            body.append('  else')
-            body.append(f'    fg {fallback_fg}')
-            body.append('  fi')
-            if powerline:
-                body.append('  printf " ctx %d%% " "$used_int"')
-            else:
-                body.append('  printf "ctx %d%%" "$used_int"; printf "$RESET"')
-        if powerline:
-            body.append('  prev=$C_CTX')
-        body.append('fi')
+        body += _context_segment(seg["context"], powerline)
 
     # --- cost ---
     if seg["cost"]["enabled"]:

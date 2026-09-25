@@ -22,44 +22,45 @@
 <text x="158.8" y="149.3" fill="#d0d0d0" textLength="100.8" lengthAdjust="spacingAndGlyphs">‹ agnoster ›</text>
 <text x="58.0" y="167.3" fill="#d0d0d0" textLength="75.6" lengthAdjust="spacingAndGlyphs">Separator</text>
 <text x="158.8" y="167.3" fill="#d0d0d0" textLength="109.2" lengthAdjust="spacingAndGlyphs">‹ powerline ›</text>
-<text x="58.0" y="185.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">↺</text>
-<text x="83.2" y="185.3" fill="#d0d0d0" textLength="268.8" lengthAdjust="spacingAndGlyphs">Reset to 'agnoster' (no changes)</text>
-<text x="32.8" y="203.3" fill="#d0d0d0" font-weight="bold" textLength="67.2" lengthAdjust="spacingAndGlyphs">SEGMENTS</text>
-<rect x="738.4" y="208" width="16.8" height="18" fill="#303030"/>
-<text x="58.0" y="221.3" fill="#d0d0d0" textLength="109.2" lengthAdjust="spacingAndGlyphs">[✓] user@host</text>
-<text x="780.4" y="221.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
-<rect x="41.2" y="226" width="697.2" height="18" fill="#d0d0d0"/>
-<rect x="738.4" y="226" width="16.8" height="18" fill="#005f87"/>
-<text x="41.2" y="239.3" fill="#1c1c1c" font-weight="bold" textLength="193.2" lengthAdjust="spacingAndGlyphs">▸ [✓] current directory</text>
+<text x="58.0" y="185.3" fill="#d0d0d0" textLength="50.4" lengthAdjust="spacingAndGlyphs">Glyphs</text>
+<text x="158.8" y="185.3" fill="#d0d0d0" textLength="100.8" lengthAdjust="spacingAndGlyphs">‹ nerdfont ›</text>
+<text x="276.4" y="185.3" fill="#d0d0d0" textLength="218.4" lengthAdjust="spacingAndGlyphs">Nerd Font arrows and icons</text>
+<text x="58.0" y="203.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">↺</text>
+<text x="83.2" y="203.3" fill="#d0d0d0" textLength="268.8" lengthAdjust="spacingAndGlyphs">Reset to 'agnoster' (no changes)</text>
+<text x="32.8" y="221.3" fill="#d0d0d0" font-weight="bold" textLength="67.2" lengthAdjust="spacingAndGlyphs">SEGMENTS</text>
+<rect x="738.4" y="226" width="16.8" height="18" fill="#303030"/>
+<text x="58.0" y="239.3" fill="#d0d0d0" textLength="109.2" lengthAdjust="spacingAndGlyphs">[✓] user@host</text>
 <text x="780.4" y="239.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
-<rect x="738.4" y="244" width="16.8" height="18" fill="#008700"/>
-<text x="58.0" y="257.3" fill="#d0d0d0" textLength="176.4" lengthAdjust="spacingAndGlyphs">[✓] git branch/status</text>
+<rect x="41.2" y="244" width="697.2" height="18" fill="#d0d0d0"/>
+<rect x="738.4" y="244" width="16.8" height="18" fill="#005f87"/>
+<text x="41.2" y="257.3" fill="#1c1c1c" font-weight="bold" textLength="193.2" lengthAdjust="spacingAndGlyphs">▸ [✓] current directory</text>
 <text x="780.4" y="257.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
-<rect x="738.4" y="262" width="16.8" height="18" fill="#0087ff"/>
-<text x="58.0" y="275.3" fill="#d0d0d0" textLength="117.6" lengthAdjust="spacingAndGlyphs">[✓] model name</text>
+<rect x="738.4" y="262" width="16.8" height="18" fill="#008700"/>
+<text x="58.0" y="275.3" fill="#d0d0d0" textLength="176.4" lengthAdjust="spacingAndGlyphs">[✓] git branch/status</text>
 <text x="780.4" y="275.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
-<text x="58.0" y="293.3" fill="#d0d0d0" textLength="134.4" lengthAdjust="spacingAndGlyphs">[✓] effort level</text>
+<rect x="738.4" y="280" width="16.8" height="18" fill="#0087ff"/>
+<text x="58.0" y="293.3" fill="#d0d0d0" textLength="117.6" lengthAdjust="spacingAndGlyphs">[✓] model name</text>
 <text x="780.4" y="293.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
-<rect x="738.4" y="298" width="16.8" height="18" fill="#875f87"/>
-<text x="58.0" y="311.3" fill="#d0d0d0" textLength="336.0" lengthAdjust="spacingAndGlyphs">[ ] output style (only when non-default)</text>
+<text x="58.0" y="311.3" fill="#d0d0d0" textLength="134.4" lengthAdjust="spacingAndGlyphs">[✓] effort level</text>
 <text x="780.4" y="311.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
-<text x="58.0" y="329.3" fill="#d0d0d0" textLength="176.4" lengthAdjust="spacingAndGlyphs">[✓] context usage bar</text>
+<rect x="738.4" y="316" width="16.8" height="18" fill="#875f87"/>
+<text x="58.0" y="329.3" fill="#d0d0d0" textLength="336.0" lengthAdjust="spacingAndGlyphs">[ ] output style (only when non-default)</text>
 <text x="780.4" y="329.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
-<text x="58.0" y="347.3" fill="#d0d0d0" textLength="168.0" lengthAdjust="spacingAndGlyphs">[ ] session cost ($)</text>
+<text x="58.0" y="347.3" fill="#d0d0d0" textLength="176.4" lengthAdjust="spacingAndGlyphs">[✓] context usage bar</text>
 <text x="780.4" y="347.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
-<rect x="738.4" y="352" width="16.8" height="18" fill="#585858"/>
-<text x="58.0" y="365.3" fill="#d0d0d0" textLength="168.0" lengthAdjust="spacingAndGlyphs">[ ] session duration</text>
-<text x="780.4" y="365.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
-<text x="32.8" y="383.3" fill="#d0d0d0" font-weight="bold" textLength="100.8" lengthAdjust="spacingAndGlyphs">YOUR SCHEMES</text>
-<text x="58.0" y="401.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">★</text>
-<text x="83.2" y="401.3" fill="#d0d0d0" textLength="252.0" lengthAdjust="spacingAndGlyphs">Save current look as a scheme…</text>
-<text x="58.0" y="419.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">⇧</text>
-<text x="83.2" y="419.3" fill="#d0d0d0" textLength="252.0" lengthAdjust="spacingAndGlyphs">Export current look to a file…</text>
-<text x="58.0" y="437.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">⇩</text>
-<text x="83.2" y="437.3" fill="#d0d0d0" textLength="176.4" lengthAdjust="spacingAndGlyphs">Import a scheme file…</text>
-<text x="58.0" y="455.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">✕</text>
-<text x="83.2" y="455.3" fill="#d0d0d0" textLength="184.8" lengthAdjust="spacingAndGlyphs">Delete a saved scheme…</text>
-<text x="32.8" y="473.3" fill="#d0d0d0" font-weight="bold" textLength="58.8" lengthAdjust="spacingAndGlyphs">ACTIONS</text>
+<text x="91.6" y="365.3" fill="#d0d0d0" textLength="302.4" lengthAdjust="spacingAndGlyphs">[ ] context mood word (Smart → Dumb)</text>
+<text x="58.0" y="383.3" fill="#d0d0d0" textLength="168.0" lengthAdjust="spacingAndGlyphs">[ ] session cost ($)</text>
+<text x="780.4" y="383.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
+<rect x="738.4" y="388" width="16.8" height="18" fill="#585858"/>
+<text x="58.0" y="401.3" fill="#d0d0d0" textLength="168.0" lengthAdjust="spacingAndGlyphs">[ ] session duration</text>
+<text x="780.4" y="401.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
+<text x="32.8" y="419.3" fill="#d0d0d0" font-weight="bold" textLength="100.8" lengthAdjust="spacingAndGlyphs">YOUR SCHEMES</text>
+<text x="58.0" y="437.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">★</text>
+<text x="83.2" y="437.3" fill="#d0d0d0" textLength="252.0" lengthAdjust="spacingAndGlyphs">Save current look as a scheme…</text>
+<text x="58.0" y="455.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">⇧</text>
+<text x="83.2" y="455.3" fill="#d0d0d0" textLength="252.0" lengthAdjust="spacingAndGlyphs">Export current look to a file…</text>
+<text x="58.0" y="473.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">⇩</text>
+<text x="83.2" y="473.3" fill="#d0d0d0" textLength="176.4" lengthAdjust="spacingAndGlyphs">Import a scheme file…</text>
 <text x="797.2" y="473.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">▼</text>
 <text x="32.8" y="509.3" fill="#d0d0d0" font-weight="bold" textLength="100.8" lengthAdjust="spacingAndGlyphs">LIVE PREVIEW</text>
 <text x="150.4" y="509.3" fill="#d0d0d0" textLength="235.2" lengthAdjust="spacingAndGlyphs">clean session · busy session</text>

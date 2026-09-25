@@ -10,7 +10,7 @@ Pick a theme, tune every color with a live preview, and install it in one keystr
 ![License: MIT](https://img.shields.io/badge/license-MIT-blue)
 ![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-3776ab)
 ![Runtime dependencies: none](https://img.shields.io/badge/runtime%20deps-none-2ea44f)
-![Themes: 16](https://img.shields.io/badge/themes-8%20dark%20%2B%208%20light-8a63d2)
+![Themes: 22](https://img.shields.io/badge/themes-11%20dark%20%2B%2011%20light-8a63d2)
 ![Contrast: WCAG AA](https://img.shields.io/badge/contrast-WCAG%20AA%20checked-0a7bbb)
 
 <img src="https://raw.githubusercontent.com/aleslanger/claude-code-statusline-designer/master/docs/menu.png" alt="The designer: theme and segment settings above a live preview of two sample statuslines" width="760">
@@ -30,8 +30,14 @@ interactive terminal UI.
   and a busy one, repaint on every change. They even update while you hover
   over a color in the palette. The preview runs the real generated script, so
   it shows exactly what Claude Code will display.
-- **16 themes, dark and light.** Agnoster, Dracula, Nord, Gruvbox, Solarized,
-  Neon, Mono and Minimal, each with a variant tuned for light terminals.
+- **22 themes, dark and light.** Catppuccin, Tokyo Night, One Dark, Dracula,
+  Nord, Gruvbox, Solarized, Agnoster, Neon, Mono and Minimal, each with a
+  variant tuned for light terminals.
+- **A context mood word.** Optionally name how full the context window is,
+  `Smart → Coasting → Foggy → Cooked → Dumb`, tinted like the bar, so you can
+  read it at a glance.
+- **No Nerd Font required.** Nerd Font arrows and icons by default, or switch
+  to plain Unicode or pure ASCII glyphs that render in any terminal.
 - **Every color is editable.** Use a 256-color palette picker, nudge values
   with the arrow keys, or type a hex code such as `#5e81ac`.
 - **Readable by construction.** A test checks every built-in theme against
@@ -50,9 +56,9 @@ interactive terminal UI.
 
 ## Themes
 
-<img src="https://raw.githubusercontent.com/aleslanger/claude-code-statusline-designer/master/docs/themes-dark.png" alt="The eight dark themes, each showing a clean and a busy sample statusline" width="820">
+<img src="https://raw.githubusercontent.com/aleslanger/claude-code-statusline-designer/master/docs/themes-dark.png" alt="The eleven dark themes, each showing a clean and a busy sample statusline" width="820">
 
-<img src="https://raw.githubusercontent.com/aleslanger/claude-code-statusline-designer/master/docs/themes-light.png" alt="The eight light themes on a white terminal background" width="820">
+<img src="https://raw.githubusercontent.com/aleslanger/claude-code-statusline-designer/master/docs/themes-light.png" alt="The eleven light themes on a white terminal background" width="820">
 
 Every row shows a clean repo at 25% context above a repo with uncommitted
 changes, max effort and 90% context. On terminals with 24-bit color the
@@ -84,6 +90,61 @@ In the designer, pick a theme with `←`/`→` and toggle the segments you want.
 Then choose **Install**. Open a new Claude Code session to see your
 statusline. Run `claude-style` again any time to change it.
 
+## Updating
+
+Upgrade the package with the tool you installed it with:
+
+```bash
+pipx upgrade claude-code-statusline-designer
+# or
+uv tool upgrade claude-code-statusline-designer
+```
+
+Then regenerate your statusline:
+
+```bash
+claude-style install
+```
+
+The installed statusline is a plain script file, so upgrading the package
+alone doesn't change it. Re-running `install` applies new features and fixes
+to it and keeps your current look. Your settings and saved schemes in
+`~/.config/claude-style/` are kept across upgrades. Check the installed
+version with `claude-style --version`.
+
+## Uninstalling
+
+1. **Remove the statusline from Claude Code.** Do this first, while the
+   command still exists:
+
+   ```bash
+   claude-style uninstall
+   ```
+
+   This removes the `statusLine` entry from `~/.claude/settings.json`. If you
+   had your own statusline script before, it also puts that script back.
+   Open a new Claude Code session to see the default status bar again.
+
+2. **Remove the package:**
+
+   ```bash
+   pipx uninstall claude-code-statusline-designer
+   # or
+   uv tool uninstall claude-code-statusline-designer
+   ```
+
+3. **Optionally, remove the leftover files.** Nothing runs them any more, but
+   they stay on disk until you delete them:
+
+   | Path | What it is |
+   |------|------------|
+   | `~/.config/claude-style/` | Your settings and saved schemes (`schemes/`) |
+   | `~/.claude/statusline-command.sh` | The generated statusline script, or your own restored script |
+   | `~/.claude/statusline-command.sh.bak` | Backup of the script you had before the first install |
+
+   Export any scheme you want to keep before deleting the config folder:
+   `claude-style scheme export <name> -o <name>.json`.
+
 ## The designer
 
 <img src="https://raw.githubusercontent.com/aleslanger/claude-code-statusline-designer/master/docs/palette.png" alt="The 256-color palette picker, previewing the hovered color in the live statusline below it" width="760">
@@ -91,7 +152,7 @@ statusline. Run `claude-style` again any time to change it.
 | Key | Where | Action |
 |-----|-------|--------|
 | `↑` `↓` | everywhere | Move between rows or fields |
-| `←` `→` | Scheme / Separator | Cycle themes (each dark theme is followed by its light variant) |
+| `←` `→` | Scheme / Separator / Glyphs | Cycle themes (each dark theme is followed by its light variant), separator style or glyph set |
 | `space` / `enter` | segment row | Turn a segment on or off |
 | `c` | segment row | Open the segment's color editor |
 | `←` `→` / `PgUp` `PgDn` | color editor | Nudge the color code by 1 / 16 |
@@ -125,7 +186,8 @@ Everything in the designer is also scriptable:
 | `claude-style preview` | Render the sample statuslines in this terminal |
 | `claude-style presets` | List built-in themes and your schemes |
 | `claude-style preset <name>` | Switch theme (`nord`, `gruvbox-light`, one of yours, …) |
-| `claude-style toggle <segment> on\|off` | Show or hide a segment |
+| `claude-style toggle <segment> on\|off` | Show or hide a segment (`context-word` toggles the mood word) |
+| `claude-style glyphs nerdfont\|unicode\|ascii` | Glyph set: Nerd Font icons, plain Unicode, or ASCII only |
 | `claude-style separator powerline\|plain` | Powerline arrows or plain `\|` separators |
 | `claude-style color list` | Every editable color, with its code and hex value |
 | `claude-style color set <segment> <field> <color>` | Set a color: `61` or `'#5e81ac'` |
@@ -149,7 +211,7 @@ The Makefile wraps the common ones: `make menu`, `make preview`,
 | `git` | Branch; the color and a `±` mark flag uncommitted changes | on |
 | `model` | Model name, e.g. `Opus 5` | on |
 | `effort` | Effort level, colored from `low` (green) to `max` | on |
-| `context` | Context-window usage as a 10-block bar or a percentage | on |
+| `context` | Context-window usage as a 10-block bar or a percentage, optionally with a mood word (`Smart` … `Dumb`) | on |
 | `output_style` | Output style, shown only when it isn't `default` | off |
 | `cost` | Session cost in USD; turns red past a threshold (default $5) | off |
 | `duration` | Session duration, e.g. `12m34s` | off |
@@ -193,6 +255,8 @@ file:
 | `segments.context.style` | `"bar"` | `"bar"` or `"percent"` |
 | `segments.context.true_color` | `true` | Use the 24-bit gradient when `COLORTERM` is `truecolor` or `24bit` |
 | `segments.context.gradient_peak` | `255` | Brightest gradient channel (`100`–`255`). Light themes use about `175` |
+| `segments.context.state_labels` | `Smart, Coasting, Foggy, Cooked, Dumb` | The five mood words (letters, digits, spaces, `.` `_` `-`; up to 16 characters) |
+| `segments.context.state_thresholds` | `25, 50, 70, 90` | Usage % at which words 2–5 start (four ascending values, 1–99) |
 | `segments.cost.warn_threshold_usd` | `5.0` | Cost above which the segment turns red |
 | `segments.cost.hide_zero`, `segments.duration.hide_zero` | `true` | Hide the segment while its value is zero |
 
@@ -218,15 +282,15 @@ even if your own directories are not repositories.
 - **Designer:** Python 3.9 or newer on Linux or macOS. It uses `curses` from
   the standard library.
 - **Statusline:** `bash`, `jq` and `git` on your `PATH`.
-- **Font:** a [Nerd Font](https://www.nerdfonts.com/) for the powerline arrows
-  and the git icon. Without one, use `claude-style separator plain` or the
-  `minimal` theme.
+- **Font:** a [Nerd Font](https://www.nerdfonts.com/) for the default powerline
+  arrows and git icon. Without one, run `claude-style glyphs unicode` (or
+  `ascii`), or pick **Glyphs** in the designer.
 
 ## Troubleshooting
 
 | Symptom | Fix |
 |---------|-----|
-| Boxes instead of arrows or the git icon | Switch your terminal to a Nerd Font, or use `separator plain` |
+| Boxes instead of arrows or the git icon | Switch your terminal to a Nerd Font, or run `claude-style glyphs unicode` (or `ascii`) |
 | The context bar has three flat colors, not a gradient | Your terminal doesn't advertise 24-bit color. Set `COLORTERM=truecolor` if it supports it |
 | Nothing shows up after installing | Start a new Claude Code session and check that `statusLine` exists in `~/.claude/settings.json` |
 | Colors look washed out on a white terminal | Pick a `-light` theme; they are tuned for light backgrounds |
@@ -286,8 +350,15 @@ Claude Code statusline projects, notably those by
 [kcchien](https://github.com/kcchien/claude-code-statusline),
 [rz1989s](https://github.com/rz1989s/claude-code-statusline) and
 [ilia-pluzhnikov](https://github.com/ilia-pluzhnikov/claude-code-statusline).
-Theme palettes follow [Dracula](https://draculatheme.com/),
-[Nord](https://www.nordtheme.com/),
+The context mood word and its default labels and thresholds come from
+[Dumbometer](https://github.com/MaximoCorrea1/dumbometer) by Maximo Correa
+Rosas (MIT). The idea to add it, the extra themes and a no-Nerd-Font glyph
+mode were prompted by
+[yet-another-statusline](https://github.com/tmck-code/yet-another-statusline).
+Theme palettes follow [Catppuccin](https://catppuccin.com/),
+[Tokyo Night](https://github.com/folke/tokyonight.nvim),
+[One Dark](https://github.com/atom/atom/tree/master/packages/one-dark-syntax),
+[Dracula](https://draculatheme.com/), [Nord](https://www.nordtheme.com/),
 [Gruvbox](https://github.com/morhetz/gruvbox) and
 [Solarized](https://ethanschoonover.com/solarized/), mapped to the xterm
 256-color palette.

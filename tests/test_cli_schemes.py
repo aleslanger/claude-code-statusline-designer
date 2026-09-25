@@ -111,6 +111,15 @@ def test_color_reset_rejects_unknown_field(home, capsys):
     assert "unknown field" in capsys.readouterr().err
 
 
+def test_glyphs_and_context_word_from_the_command_line(home):
+    assert main(["glyphs", "ascii"]) == EXIT_OK
+    assert main(["toggle", "context-word", "on"]) == EXIT_OK
+
+    config = _current_config()
+    assert config["glyphs"] == "ascii"
+    assert config["segments"]["context"]["state_word"] is True
+
+
 def test_unknown_preset_lists_what_is_available(home, capsys):
     assert main(["preset", "nope"]) == EXIT_ERROR
     assert "agnoster" in capsys.readouterr().err

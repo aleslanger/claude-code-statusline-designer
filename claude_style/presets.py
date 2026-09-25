@@ -104,6 +104,45 @@ DARK_PRESETS = {
         },
         extras((125, 230), cost(230, 100, 160), (240, 230)),
     ),
+    "catppuccin": preset(  # Mocha
+        "catppuccin",
+        "powerline",
+        {
+            "user_host": seg(237, 189),
+            "dir": seg(111, 234),
+            "git": git(151, 216, 234),
+            "model": seg(183, 234),
+            "effort": effort(234, 151, 223, 216, 211, 147, 245),
+            "context": context(189, (29, 130, 161), 236, 233, 255),
+        },
+        extras((147, 234), cost(234, 223, 211), (238, 189)),
+    ),
+    "tokyo-night": preset(
+        "tokyo-night",
+        "powerline",
+        {
+            "user_host": seg(236, 153),
+            "dir": seg(111, 234),
+            "git": git(149, 215, 234),
+            "model": seg(141, 234),
+            "effort": effort(234, 149, 179, 215, 211, 141, 103),
+            "context": context(189, (29, 130, 161), 236, 232, 255),
+        },
+        extras((117, 234), cost(234, 179, 211), (60, 189)),
+    ),
+    "onedark": preset(
+        "onedark",
+        "powerline",
+        {
+            "user_host": seg(237, 249),
+            "dir": seg(75, 235),
+            "git": git(114, 173, 235),
+            "model": seg(176, 235),
+            "effort": effort(235, 114, 180, 173, 168, 176, 245),
+            "context": context(255, (28, 130, 124), 237, 234, 255),
+        },
+        extras((73, 235), cost(235, 180, 168), (239, 249)),
+    ),
 }
 
 # Each dark theme is followed by its light variant, so cycling ←/→ in the menu

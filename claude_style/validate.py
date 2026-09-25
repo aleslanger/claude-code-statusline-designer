@@ -7,6 +7,7 @@ an imported scheme file -- must pass through validate_config() before render.
 import re
 
 from claude_style.config import COLOR_FIELDS, SEGMENT_ORDER, get_color
+from claude_style.glyphs import GLYPH_MODES
 
 NAME_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,39}$")
 COLOR_MIN = 0
@@ -15,6 +16,9 @@ SEPARATORS = ("powerline", "plain")
 CONTEXT_STYLES = ("bar", "percent")
 THRESHOLD_COUNT = 3
 GRADIENT_PEAK_MIN = 100  # below this the gradient turns muddy brown on any background
+STATE_LABEL_COUNT = 5
+# State labels are interpolated into the bash script: no quotes, $, backslashes or backticks.
+STATE_LABEL_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9 ._-]{0,15}$")
 THRESHOLD_LIMIT_MAX = 1000
 COLS_MAX = 10000
 PATH_SEGMENTS_MAX = 50
@@ -59,7 +63,30 @@ def _validate_colors(config: dict, segment: str) -> None:
         _require_int(value, COLOR_MIN, COLOR_MAX, where)
 
 
+def _validate_state_word(ctx: dict) -> None:
+    _require_bool(ctx.get("state_word"), "segments.context.state_word")
+    labels = ctx.get("state_labels")
+    _require(
+        isinstance(labels, list) and len(labels) == STATE_LABEL_COUNT,
+        f"segments.context.state_labels must be a list of {STATE_LABEL_COUNT} words",
+    )
+    for i, label in enumerate(labels):
+        _require(
+            isinstance(label, str) and bool(STATE_LABEL_RE.match(label)),
+            f"segments.context.state_labels.{i} must be 1-16 letters, digits, spaces, '.', '_' or '-', got {label!r}",
+        )
+    thresholds = ctx.get("state_thresholds")
+    _require(
+        isinstance(thresholds, list) and len(thresholds) == STATE_LABEL_COUNT - 1,
+        f"segments.context.state_thresholds must be a list of {STATE_LABEL_COUNT - 1} percentages",
+    )
+    for i, value in enumerate(thresholds):
+        _require_int(value, 1, 99, f"segments.context.state_thresholds.{i}")
+    _require(thresholds == sorted(set(thresholds)), "segments.context.state_thresholds must be strictly ascending")
+
+
 def _validate_context(ctx: dict) -> None:
+    _validate_state_word(ctx)
     _require(ctx.get("style") in CONTEXT_STYLES, f"segments.context.style must be one of {CONTEXT_STYLES}")
     _require_bool(ctx.get("true_color"), "segments.context.true_color")
     _require_int(ctx.get("gradient_peak"), GRADIENT_PEAK_MIN, COLOR_MAX, "segments.context.gradient_peak")
@@ -95,6 +122,7 @@ def validate_config(config) -> None:
     if config.get("based_on") is not None:
         validate_name(config["based_on"])
     _require(config.get("separator") in SEPARATORS, f"separator must be one of {SEPARATORS}")
+    _require(config.get("glyphs") in GLYPH_MODES, f"glyphs must be one of {GLYPH_MODES}")
     segments = config.get("segments")
     _require(isinstance(segments, dict), "segments must be an object")
 

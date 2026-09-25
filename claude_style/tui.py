@@ -21,6 +21,7 @@ from claude_style.config import (
     set_color,
 )
 from claude_style.contrast import readability_issues
+from claude_style.glyphs import GLYPH_MODE_LABELS, GLYPH_MODES
 from claude_style.installer import STATUSLINE_PATH, install, uninstall
 from claude_style.palette import parse_color, to_hex
 from claude_style.preview import preview
@@ -72,10 +73,20 @@ TRAILING_SWATCH = 4
 TRAILING_HINT = 5
 MIN_LIST_ROWS = 6  # below this, the live preview is hidden to leave room for the menu
 
+def _segment_rows() -> list[tuple[str, str | None]]:
+    """One row per segment; the context mood word sits right under the context segment it belongs to."""
+    rows = []
+    for key in SEGMENT_ORDER:
+        rows.append(("segment", key))
+        if key == "context":
+            rows.append(("state_word", None))
+    return rows
+
+
 _ROWS = (
-    [("section", "Theme"), ("preset", None), ("separator", None), ("reset", None)]
+    [("section", "Theme"), ("preset", None), ("separator", None), ("glyphs", None), ("reset", None)]
     + [("section", "Segments")]
-    + [("segment", key) for key in SEGMENT_ORDER]
+    + _segment_rows()
     + [("section", "Your schemes")]
     + [("save_scheme", None), ("export", None), ("import", None), ("delete_scheme", None)]
     + [("section", "Actions")]
@@ -141,8 +152,13 @@ def _row_text(kind: str, key: str | None, config: dict) -> str:
         return f"Scheme      ‹ {config['preset']} ›{_scheme_tag(config)}"
     if kind == "separator":
         return f"Separator   ‹ {config['separator']} ›"
+    if kind == "glyphs":
+        return f"Glyphs      ‹ {config['glyphs']} ›  {GLYPH_MODE_LABELS[config['glyphs']]}"
     if kind == "reset":
         return _reset_row_text(config)
+    if kind == "state_word":
+        mark = "✓" if config["segments"]["context"]["state_word"] else " "
+        return f"    [{mark}] context mood word (Smart → Dumb)"
     if kind == "segment":
         mark = "✓" if config["segments"][key]["enabled"] else " "
         return f"[{mark}] {SEGMENT_LABELS[key]}"
@@ -459,6 +475,9 @@ def _cycle_scheme(config: dict, step: int, state: MenuState) -> dict | None:
 def _handle_activate(stdscr, kind: str, key: str | None, config: dict, state: MenuState) -> tuple[str | None, dict]:
     if kind == "segment":
         config["segments"][key]["enabled"] = not config["segments"][key]["enabled"]
+    elif kind == "state_word":
+        ctx = config["segments"]["context"]
+        ctx["state_word"] = not ctx["state_word"]
     elif kind in _SCHEME_ACTIONS:
         config = _SCHEME_ACTIONS[kind](stdscr, config, state)
     elif kind == "preview":
@@ -482,6 +501,9 @@ def _handle_change(kind: str, ch: int, config: dict, state: MenuState) -> dict:
         return switched
     if kind == "separator":
         config["separator"] = "plain" if config["separator"] == "powerline" else "powerline"
+    if kind == "glyphs":
+        modes = list(GLYPH_MODES)
+        config["glyphs"] = modes[(modes.index(config["glyphs"]) + step) % len(modes)]
     return config
 
 
