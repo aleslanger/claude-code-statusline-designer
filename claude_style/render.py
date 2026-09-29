@@ -1,5 +1,13 @@
 """Render a Claude Code Statusline Designer config into a Claude Code statusline bash script."""
 from claude_style.glyphs import glyph_definitions
+from claude_style.render_session import cache_segment, mode_segment, session_segment
+from claude_style.render_usage import (
+    FMT_LEFT,
+    limits_segment,
+    lines_segment,
+    needs_clock,
+    pr_segment,
+)
 from claude_style.validate import validate_config
 
 HEADER = """#!/usr/bin/env bash
@@ -232,6 +240,8 @@ def render(config: dict) -> str:
         parts.append(_effort_case(seg["effort"]["colors"]))
     if seg["context"]["enabled"]:
         parts.append(_context_color_logic(seg["context"]))
+    if needs_clock(seg):
+        parts.append(FMT_LEFT)
     if seg["dir"]["enabled"] and seg["dir"].get("responsive", True):
         parts.append(_dir_shorten_logic(seg["dir"]))
 
@@ -262,6 +272,10 @@ def render(config: dict) -> str:
 
     if seg["git"]["enabled"]:
         body += _git_segment(seg["git"], powerline)
+    if seg["pr"]["enabled"]:
+        body += pr_segment(seg["pr"], powerline)
+    if seg["session"]["enabled"]:
+        body += session_segment(seg["session"], powerline)
 
     # --- model + effort ---
     if seg["model"]["enabled"]:
@@ -289,6 +303,8 @@ def render(config: dict) -> str:
         body.append('fi')
     if powerline and seg["model"]["enabled"] and not seg["effort"]["enabled"]:
         body.append('printf " "')
+    if seg["mode"]["enabled"]:
+        body += mode_segment(seg["mode"], powerline)
 
     # --- output style (only shown when not "default") ---
     if seg["output_style"]["enabled"]:
@@ -306,6 +322,8 @@ def render(config: dict) -> str:
 
     if seg["context"]["enabled"]:
         body += _context_segment(seg["context"], powerline)
+    if seg["limits"]["enabled"]:
+        body += limits_segment(seg["limits"], powerline)
 
     # --- cost ---
     if seg["cost"]["enabled"]:
@@ -326,6 +344,11 @@ def render(config: dict) -> str:
             body.append('  plain_join')
             body.append('  fg "$C_COST"; LC_NUMERIC=C printf "$%.2f" "$cost_usd"; printf "$RESET"')
         body.append('fi')
+
+    if seg["cache"]["enabled"]:
+        body += cache_segment(seg["cache"], powerline)
+    if seg["lines"]["enabled"]:
+        body += lines_segment(seg["lines"], powerline)
 
     # --- duration ---
     if seg["duration"]["enabled"]:

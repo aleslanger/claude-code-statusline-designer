@@ -8,6 +8,8 @@ Usage: make docs
 """
 from __future__ import annotations
 
+import copy
+import json
 import os
 import re
 import shutil
@@ -24,6 +26,7 @@ sys.path[:0] = [str(ROOT), str(ROOT / "tests")]
 from tty_session import DOWN, ENTER, RIGHT, TuiSession, fake_identity_bin
 
 from claude_style.ansi import DEFAULT, parse
+from claude_style.config import DEFAULT_CONFIG
 from claude_style.palette import to_hex
 from claude_style.presets import DARK_PRESETS, PRESETS
 from claude_style.preview import SAMPLES, run_samples
@@ -32,7 +35,10 @@ from claude_style.schemes import scheme_config
 DOCS = ROOT / "docs"
 STATUSLINE_COLUMNS = 120
 LABEL_WIDTH = 18
-MENU_ROWS, MENU_COLS = 30, 96
+MENU_ROWS, MENU_COLS = 44, 132  # tall enough for the whole segment list without scrolling
+# Off-by-default segments switched on in the menu shot, so the live preview shows them too.
+MENU_EXTRA_SEGMENTS = ("pr", "limits")
+PALETTE_ROWS = 24  # the palette is short; a menu-sized window would leave it floating in empty space
 PALETTE_HOVER_STEPS = 13
 BROWSERS = ("chromium", "chromium-browser", "google-chrome", "google-chrome-stable")
 PNG_SCALE = 2  # retina-sharp PNGs
@@ -241,18 +247,33 @@ def _fake_identity() -> None:
     os.environ["PATH"] = f"{fake_identity_bin()}{os.pathsep}{os.environ['PATH']}"
 
 
-def _menu_shots() -> dict[str, list[list[Cell]]]:
-    session = TuiSession(Path(tempfile.mkdtemp()), rows=MENU_ROWS, cols=MENU_COLS, env={"COLORTERM": "truecolor"})
+def _menu_home() -> Path:
+    """Throwaway HOME whose config turns on MENU_EXTRA_SEGMENTS."""
+    home = Path(tempfile.mkdtemp())
+    config = copy.deepcopy(DEFAULT_CONFIG)
+    for segment in MENU_EXTRA_SEGMENTS:
+        config["segments"][segment]["enabled"] = True
+    config_dir = home / ".config" / "claude-style"
+    config_dir.mkdir(parents=True)
+    (config_dir / "config.json").write_text(json.dumps(config), encoding="utf-8")
+    return home
+
+
+def _shot(rows: int, open_palette: bool) -> list[list[Cell]]:
+    session = TuiSession(_menu_home(), rows=rows, cols=MENU_COLS, env={"COLORTERM": "truecolor"})
     try:
         session.select_row("current directory")
-        menu = screen_rows(session, DARK)
-        session.send("c")
-        session.send(ENTER)
-        session.send(DOWN + RIGHT * PALETTE_HOVER_STEPS)
-        palette = screen_rows(session, DARK)
+        if open_palette:
+            session.send("c")
+            session.send(ENTER)
+            session.send(DOWN + RIGHT * PALETTE_HOVER_STEPS)
+        return screen_rows(session, DARK)
     finally:
         session.kill()
-    return {"menu": menu, "palette": palette}
+
+
+def _menu_shots() -> dict[str, list[list[Cell]]]:
+    return {"menu": _shot(MENU_ROWS, open_palette=False), "palette": _shot(PALETTE_ROWS, open_palette=True)}
 
 
 def main() -> None:

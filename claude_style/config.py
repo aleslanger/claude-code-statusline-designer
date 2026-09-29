@@ -11,11 +11,17 @@ SEGMENT_ORDER = [
     "user_host",
     "dir",
     "git",
+    "pr",
+    "session",
     "model",
     "effort",
+    "mode",
     "output_style",
     "context",
+    "limits",
     "cost",
+    "cache",
+    "lines",
     "duration",
 ]
 
@@ -23,11 +29,17 @@ SEGMENT_LABELS = {
     "user_host": "user@host",
     "dir": "current directory",
     "git": "git branch/status",
+    "pr": "pull request and review state",
+    "session": "session name",
     "model": "model name",
     "effort": "effort level",
+    "mode": "fast mode, vim mode and agent",
     "output_style": "output style (only when non-default)",
     "context": "context usage bar",
+    "limits": "plan usage limits (5h, weekly)",
     "cost": "session cost ($)",
+    "cache": "prompt cache (hit ratio, warm/cold)",
+    "lines": "lines added/removed",
     "duration": "session duration",
 }
 
@@ -35,6 +47,9 @@ COLOR_FIELDS = {
     "user_host": [("bg", "background"), ("fg", "text")],
     "dir": [("bg", "background"), ("fg", "text")],
     "git": [("bg_clean", "clean background"), ("bg_dirty", "dirty background"), ("fg", "text")],
+    "pr": [("bg", "background"), ("fg", "text")],
+    "session": [("bg", "background"), ("fg", "text")],
+    "mode": [("bg", "background"), ("fg", "text")],
     "model": [("bg", "background"), ("fg", "text")],
     "effort": [
         ("fg", "text"),
@@ -54,7 +69,10 @@ COLOR_FIELDS = {
         ("bar_empty", "empty bar blocks"),
     ],
     "output_style": [("bg", "background"), ("fg", "text")],
+    "limits": [("fg", "text"), ("colors.ok", "ok"), ("colors.warn", "warn"), ("colors.crit", "critical")],
     "cost": [("fg", "text"), ("colors.normal", "normal"), ("colors.warn", "warn")],
+    "cache": [("fg", "text"), ("colors.warm", "warm"), ("colors.cold", "cold")],
+    "lines": [("bg", "background"), ("fg", "text")],
     "duration": [("bg", "background"), ("fg", "text")],
 }
 
@@ -141,6 +159,25 @@ DEFAULT_CONFIG = {
             "enabled": False,
             "bg": 96,
             "fg": 255,
+        },
+        # The colors of the segments below are borrowed from each theme
+        # (see preset_builders.usage_extras), so a theme never has to tune them.
+        "pr": {"enabled": False, "bg": 96, "fg": 255},
+        "limits": {
+            "enabled": False,
+            "fg": 255,
+            "show_reset": True,  # time left until the window resets, e.g. "(2h14m)"
+            "thresholds": [70, 90],  # usage % where the warn and crit colors start
+            "colors": {"ok": 28, "warn": 166, "crit": 160},
+        },
+        "lines": {"enabled": False, "bg": 236, "fg": 250, "hide_zero": True},
+        "session": {"enabled": False, "bg": 240, "fg": 255, "max_length": 24},
+        "mode": {"enabled": False, "bg": 236, "fg": 250},
+        "cache": {
+            "enabled": False,
+            "fg": 255,
+            "show_ttl": True,  # time left until the cached prefix goes cold, e.g. "(4m)"
+            "colors": {"warm": 22, "cold": 239},
         },
         "cost": {
             "enabled": False,

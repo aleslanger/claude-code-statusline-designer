@@ -53,5 +53,30 @@ def extras(output_style: tuple[int, int], cost_: dict, duration: tuple[int, int]
     }
 
 
+def usage_extras(segments: dict) -> dict:
+    """Colors for the usage and session segments, borrowed from ones the theme already tunes.
+
+    Limits reuse the context thresholds (green -> amber -> red), cache the
+    effort text on its low (warm) and default (cold) colors, pr the output
+    style, session the duration, lines and mode user@host. None of them sits
+    next to its donor.
+    """
+    ctx, effort_ = segments["context"], segments["effort"]
+    ok, warn, crit = (color for _limit, color in ctx["thresholds"])
+
+    def pair(donor: str) -> dict:
+        return {"bg": segments[donor]["bg"], "fg": segments[donor]["fg"]}
+
+    return {
+        "pr": pair("output_style"),
+        "session": pair("duration"),
+        "mode": pair("user_host"),
+        "limits": {"fg": ctx["fg"], "colors": {"ok": ok, "warn": warn, "crit": crit}},
+        "cache": {"fg": effort_["fg"], "colors": {"warm": effort_["colors"]["low"], "cold": effort_["colors"]["default"]}},
+        "lines": pair("user_host"),
+    }
+
+
 def preset(name: str, separator: str, segments: dict, extra: dict | None = None) -> dict:
-    return {"preset": name, "separator": separator, "segments": {**segments, **(extra or {})}}
+    merged = {**segments, **(extra or {})}
+    return {"preset": name, "separator": separator, "segments": {**merged, **usage_extras(merged)}}

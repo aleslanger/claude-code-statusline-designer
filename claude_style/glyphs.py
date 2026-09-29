@@ -15,6 +15,15 @@ GLYPH_MODE_LABELS = {
     "ascii": "ASCII only, works everywhere",
 }
 
+# Pull request review states; plain Unicode renders fine without a Nerd Font.
+UNICODE_PR_STATES = {
+    "pr_approved": r"$'\xe2\x9c\x93'",  # ✓
+    "pr_changes": r"$'\xe2\x9c\x97'",  # ✗ changes requested
+    "pr_pending": r"$'\xe2\x97\x8f'",  # ● review pending
+    "pr_draft": r"$'\xe2\x97\x8c'",  # ◌
+    "ellipsis": r"$'\xe2\x80\xa6'",  # … ends a shortened session name
+}
+
 # name -> bash ANSI-C quoted literal
 GLYPHS = {
     "nerdfont": {
@@ -23,6 +32,7 @@ GLYPHS = {
         "dirty": r"$' \xc2\xb1'",  # ±
         "full": r"$'\xe2\x96\x88'",  # █
         "empty": r"$'\xe2\x96\x91'",  # ░
+        **UNICODE_PR_STATES,
     },
     "unicode": {
         "sep": r"$'\xe2\x96\x8c'",  # ▌ flat segment edge
@@ -30,6 +40,7 @@ GLYPHS = {
         "dirty": r"$' \xc2\xb1'",
         "full": r"$'\xe2\x96\x88'",
         "empty": r"$'\xe2\x96\x91'",
+        **UNICODE_PR_STATES,
     },
     "ascii": {
         "sep": "''",
@@ -37,6 +48,11 @@ GLYPHS = {
         "dirty": "' *'",
         "full": "'#'",
         "empty": "'.'",
+        "pr_approved": "'+'",
+        "pr_changes": "'x'",
+        "pr_pending": "'?'",
+        "pr_draft": "'~'",
+        "ellipsis": "'...'",
     },
 }
 

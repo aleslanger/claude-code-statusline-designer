@@ -12,6 +12,7 @@ import os
 import shutil
 import subprocess
 import tempfile
+import time
 from pathlib import Path
 from typing import NamedTuple
 
@@ -24,28 +25,66 @@ SAMPLE_REPOS = {  # workdir -> (branch, has uncommitted changes)
     "projects/webapp": ("feature/login", True),
 }
 
+# Slack so a countdown computed a moment after the payload still shows the whole minute.
+RESET_SLACK_S = 30
+
+
+def _from_now(days: int = 0, hours: int = 0, minutes: int = 0) -> int:
+    return ((days * 24 + hours) * 60 + minutes) * 60 + RESET_SLACK_S
+
+
 SAMPLES = [
     {
-        "label": "clean repo, high effort, 25% context, $0.42, 12m",
+        "label": "clean repo, high effort, 25% context, $0.42, 12m, limits 23% / 41%",
         "workdir": "projects/my-app",
         "data": {
             "model": {"display_name": "Sonnet 5"},
             "context_window": {"used_percentage": 25},
             "effort": {"level": "high"},
-            "cost": {"total_cost_usd": 0.42, "total_duration_ms": 12 * 60 * 1000},
+            "cost": {
+                "total_cost_usd": 0.42,
+                "total_duration_ms": 12 * 60 * 1000,
+                "total_lines_added": 156,
+                "total_lines_removed": 23,
+            },
+            "rate_limits": {"five_hour": {"used_percentage": 23}, "seven_day": {"used_percentage": 41}},
+            "prompt_cache": {"warm": True, "hit_ratio": 0.87},
+            "session_name": "fix login flow",
             "session_id": "preview",
+        },
+        # field path -> seconds from now; turned into an epoch timestamp when the sample runs
+        "times_in": {
+            "rate_limits.five_hour.resets_at": _from_now(hours=2, minutes=14),
+            "rate_limits.seven_day.resets_at": _from_now(days=3, hours=4),
+            "prompt_cache.expires_at": _from_now(minutes=4),
         },
     },
     {
-        "label": "dirty repo, max effort, 90% context, $7.80, plan output style",
+        "label": "dirty repo, max effort, 90% context, $7.80, plan output style, PR #42, limits 92% / 78%",
         "workdir": "projects/webapp",
         "data": {
             "model": {"display_name": "Opus 5"},
             "context_window": {"used_percentage": 90},
             "effort": {"level": "max"},
             "output_style": {"name": "plan"},
-            "cost": {"total_cost_usd": 7.80, "total_duration_ms": 95 * 60 * 1000},
+            "cost": {
+                "total_cost_usd": 7.80,
+                "total_duration_ms": 95 * 60 * 1000,
+                "total_lines_added": 1204,
+                "total_lines_removed": 387,
+            },
+            "rate_limits": {"five_hour": {"used_percentage": 92}, "seven_day": {"used_percentage": 78}},
+            "pr": {"number": 42, "review_state": "changes_requested"},
+            "prompt_cache": {"warm": False, "hit_ratio": 0.42, "expires_at": None},
+            "session_name": "refactor payment webhooks and retries",
+            "fast_mode": True,
+            "vim": {"mode": "NORMAL"},
+            "agent": {"name": "reviewer"},
             "session_id": "preview",
+        },
+        "times_in": {
+            "rate_limits.five_hour.resets_at": _from_now(minutes=38),
+            "rate_limits.seven_day.resets_at": _from_now(days=1, hours=9),
         },
     },
     {
@@ -83,9 +122,22 @@ def sample_home() -> Path:
     return _sample_home
 
 
+def _with_value(node: dict, keys: list[str], value: int) -> dict:
+    head, *rest = keys
+    return {**node, head: _with_value(node.get(head, {}), rest, value) if rest else value}
+
+
+def _with_times(data: dict, times_in: dict) -> dict:
+    """Turn "seconds from now" into the epoch timestamps Claude Code sends."""
+    now = int(time.time())
+    for path, seconds in times_in.items():
+        data = _with_value(data, path.split("."), now + seconds)
+    return data
+
+
 def _payload(sample: dict, home: Path) -> str:
-    data = {**sample["data"], "workspace": {"current_dir": str(home / sample["workdir"])}}
-    return json.dumps(data)
+    data = _with_times(sample["data"], sample.get("times_in", {}))
+    return json.dumps({**data, "workspace": {"current_dir": str(home / sample["workdir"])}})
 
 
 class SampleResult(NamedTuple):

@@ -9,7 +9,8 @@ MIN_TEXT_CONTRAST = 3.0  # WCAG AA for UI components and large text
 MIN_SUBTLE_CONTRAST = 1.4  # empty bar blocks are meant to be quiet, not invisible
 DARK_TERMINAL_BG = 234
 LIGHT_TERMINAL_BG = 231
-SIMPLE_SEGMENTS = ("user_host", "dir", "model", "output_style", "duration")
+SIMPLE_SEGMENTS = ("user_host", "dir", "pr", "session", "model", "mode", "output_style", "lines", "duration")
+STATUS_SEGMENTS = ("limits", "cost", "cache")  # one text color over a background that tracks a status
 
 
 class Issue(NamedTuple):
@@ -30,8 +31,8 @@ def _powerline_pairs(segments: dict) -> list[tuple[str, str, int, int, float]]:
     pairs += [("git", f"text on {state} background", git["fg"], git[f"bg_{state}"], MIN_TEXT_CONTRAST) for state in ("clean", "dirty")]
     effort = segments["effort"]
     pairs += [("effort", f"text on '{level}'", effort["fg"], bg, MIN_TEXT_CONTRAST) for level, bg in effort["colors"].items()]
-    cost = segments["cost"]
-    pairs += [("cost", f"text on '{state}'", cost["fg"], bg, MIN_TEXT_CONTRAST) for state, bg in cost["colors"].items()]
+    for s in STATUS_SEGMENTS:
+        pairs += [(s, f"text on '{state}'", segments[s]["fg"], bg, MIN_TEXT_CONTRAST) for state, bg in segments[s]["colors"].items()]
 
     ctx = segments["context"]
     for limit, bg in ctx["thresholds"]:
@@ -48,7 +49,7 @@ def _plain_pairs(segments: dict, terminal_bg: int) -> list[tuple[str, str, int, 
     drawn = [(s, "text", segments[s]["fg"]) for s in SIMPLE_SEGMENTS]
     drawn += [("git", f"{state} branch", segments["git"][f"bg_{state}"]) for state in ("clean", "dirty")]
     drawn += [("effort", f"'{level}'", c) for level, c in segments["effort"]["colors"].items()]
-    drawn += [("cost", f"'{state}'", c) for state, c in segments["cost"]["colors"].items()]
+    drawn += [(s, f"'{state}'", c) for s in STATUS_SEGMENTS for state, c in segments[s]["colors"].items()]
     drawn += [("context", f"<{limit}% text", c) for limit, c in segments["context"]["thresholds"]]
     return [(seg, f"{what} on terminal background", fg, terminal_bg, MIN_TEXT_CONTRAST) for seg, what, fg in drawn]
 

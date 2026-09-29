@@ -23,6 +23,9 @@ THRESHOLD_LIMIT_MAX = 1000
 COLS_MAX = 10000
 PATH_SEGMENTS_MAX = 50
 COST_MAX_USD = 1_000_000
+LIMIT_THRESHOLD_COUNT = 2  # where the warn and crit colors start
+SESSION_NAME_MIN = 4  # room for at least a few letters before the ellipsis
+SESSION_NAME_MAX = 200
 
 
 class ConfigError(ValueError):
@@ -116,6 +119,18 @@ def _validate_cost(c: dict) -> None:
     )
 
 
+def _validate_limits(limits: dict) -> None:
+    _require_bool(limits.get("show_reset"), "segments.limits.show_reset")
+    thresholds = limits.get("thresholds")
+    _require(
+        isinstance(thresholds, list) and len(thresholds) == LIMIT_THRESHOLD_COUNT,
+        f"segments.limits.thresholds must be a list of {LIMIT_THRESHOLD_COUNT} percentages",
+    )
+    for i, value in enumerate(thresholds):
+        _require_int(value, 1, 100, f"segments.limits.thresholds.{i}")
+    _require(thresholds == sorted(set(thresholds)), "segments.limits.thresholds must be strictly ascending")
+
+
 def validate_config(config) -> None:
     _require(isinstance(config, dict), "config must be a JSON object")
     validate_name(config.get("preset"))
@@ -134,4 +149,8 @@ def validate_config(config) -> None:
     _validate_context(segments["context"])
     _validate_dir(segments["dir"])
     _validate_cost(segments["cost"])
-    _require_bool(segments["duration"].get("hide_zero"), "segments.duration.hide_zero")
+    _validate_limits(segments["limits"])
+    _require_int(segments["session"].get("max_length"), SESSION_NAME_MIN, SESSION_NAME_MAX, "segments.session.max_length")
+    _require_bool(segments["cache"].get("show_ttl"), "segments.cache.show_ttl")
+    for segment in ("duration", "lines"):
+        _require_bool(segments[segment].get("hide_zero"), f"segments.{segment}.hide_zero")

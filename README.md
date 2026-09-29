@@ -209,14 +209,33 @@ The Makefile wraps the common ones: `make menu`, `make preview`,
 | `user_host` | `user@host` | on |
 | `dir` | Working directory, shortened in narrow terminals | on |
 | `git` | Branch; the color and a `±` mark flag uncommitted changes | on |
+| `pr` | Open pull request (`#42`) or GitLab merge request (`!7`) with its review state: `✓` approved, `✗` changes requested, `●` pending, `◌` draft | off |
+| `session` | Session name set with `/rename` or `--name`, or the generated title; shortened to 24 characters | off |
 | `model` | Model name, e.g. `Opus 5` | on |
 | `effort` | Effort level, colored from `low` (green) to `max` | on |
 | `context` | Context-window usage as a 10-block bar or a percentage, optionally with a mood word (`Smart` … `Dumb`) | on |
+| `mode` | What is switched on: `fast` mode, the vim mode (`NORMAL`, `INSERT`, …) and the `--agent` name, e.g. `fast NORMAL @reviewer`; hidden when none is | off |
 | `output_style` | Output style, shown only when it isn't `default` | off |
+| `limits` | Plan usage: the 5-hour and weekly limits, e.g. `5h 23% (2h14m)` `7d 41% (3d4h)`, with the time until each resets; amber from 70%, red from 90% | off |
 | `cost` | Session cost in USD; turns red past a threshold (default $5) | off |
+| `cache` | Prompt cache: hit ratio and the time until the cache goes cold, e.g. `cache 87% (4m)`; `cache 42% cold` once it has expired | off |
+| `lines` | Lines added and removed in the session, e.g. `+156 -23` | off |
 | `duration` | Session duration, e.g. `12m34s` | off |
 
 All values come from the JSON that Claude Code passes to the statusline script.
+
+The `limits` segment appears only for claude.ai Pro and Max subscribers, and
+only after the first response in a session. Claude Code reports no monthly
+limit for these plans. Behind a
+[Claude apps gateway](https://code.claude.com/docs/en/claude-apps-gateway-spend-limits)
+that sets a spend limit, a third `spend 63%` window appears as well. The
+countdown updates whenever Claude Code refreshes the statusline. To keep it
+ticking while the session is idle, add `"refreshInterval": 60` to the
+`statusLine` entry in `~/.claude/settings.json`. The same applies to the
+`cache` countdown.
+
+With the `mode` segment on, you can add `"hideVimModeIndicator": true` to the
+same entry so the vim mode is not shown twice.
 
 ## Your own schemes
 
@@ -258,7 +277,11 @@ file:
 | `segments.context.state_labels` | `Smart, Coasting, Foggy, Cooked, Dumb` | The five mood words (letters, digits, spaces, `.` `_` `-`; up to 16 characters) |
 | `segments.context.state_thresholds` | `25, 50, 70, 90` | Usage % at which words 2–5 start (four ascending values, 1–99) |
 | `segments.cost.warn_threshold_usd` | `5.0` | Cost above which the segment turns red |
-| `segments.cost.hide_zero`, `segments.duration.hide_zero` | `true` | Hide the segment while its value is zero |
+| `segments.limits.thresholds` | `70, 90` | Usage % at which a limit turns amber, then red (two ascending values, 1–100) |
+| `segments.limits.show_reset` | `true` | Show the time until each limit resets |
+| `segments.cache.show_ttl` | `true` | Show the time until the prompt cache goes cold |
+| `segments.session.max_length` | `24` | Longest session name shown before it is cut with `…` (4–200) |
+| `segments.cost.hide_zero`, `segments.duration.hide_zero`, `segments.lines.hide_zero` | `true` | Hide the segment while its value is zero |
 
 ## How it works
 

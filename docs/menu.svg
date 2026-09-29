@@ -1,22 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="838" height="602" viewBox="0 0 838 602" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="14">
+<svg xmlns="http://www.w3.org/2000/svg" width="1141" height="854" viewBox="0 0 1141 854" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="14">
 <defs>
 <pattern id="shade262626" width="2.8" height="2.8" patternUnits="userSpaceOnUse"><rect width="1.4" height="1.4" fill="#262626"/></pattern>
 </defs>
 <rect width="100%" height="100%" rx="10" fill="#2d2d2d"/>
-<rect y="30" width="100%" height="562" fill="#1c1c1c"/>
-<rect y="582" width="100%" height="20" rx="10" fill="#1c1c1c"/>
+<rect y="30" width="100%" height="814" fill="#1c1c1c"/>
+<rect y="834" width="100%" height="20" rx="10" fill="#1c1c1c"/>
 <circle cx="20" cy="15.0" r="6" fill="#ff5f57"/>
 <circle cx="40" cy="15.0" r="6" fill="#febc2e"/>
 <circle cx="60" cy="15.0" r="6" fill="#28c840"/>
-<text x="419" y="20.0" fill="#8a8a8a" text-anchor="middle">claude-style</text>
-<rect x="16.0" y="46" width="798.0" height="18" fill="#5f5fd7"/>
+<text x="570" y="20.0" fill="#8a8a8a" text-anchor="middle">claude-style</text>
+<rect x="16.0" y="46" width="1100.4" height="18" fill="#5f5fd7"/>
 <text x="41.2" y="59.3" fill="#e5e5e5" font-weight="bold" textLength="260.4" lengthAdjust="spacingAndGlyphs">Claude Code Statusline Designer</text>
 <text x="310.0" y="59.3" fill="#e5e5e5" textLength="218.4" lengthAdjust="spacingAndGlyphs">design · preview · install</text>
-<rect x="679.6" y="64" width="126.0" height="18" fill="#af5f00"/>
+<rect x="982.0" y="64" width="126.0" height="18" fill="#af5f00"/>
 <text x="32.8" y="77.3" fill="#d0d0d0" textLength="134.4" lengthAdjust="spacingAndGlyphs">scheme: agnoster</text>
 <text x="184.0" y="77.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">·</text>
 <text x="209.2" y="77.3" fill="#d0d0d0" textLength="168.0" lengthAdjust="spacingAndGlyphs">separator: powerline</text>
-<text x="688.0" y="77.3" fill="#000000" font-weight="bold" textLength="109.2" lengthAdjust="spacingAndGlyphs">NOT INSTALLED</text>
+<text x="990.4" y="77.3" fill="#000000" font-weight="bold" textLength="109.2" lengthAdjust="spacingAndGlyphs">NOT INSTALLED</text>
 <text x="32.8" y="131.3" fill="#d0d0d0" font-weight="bold" textLength="42.0" lengthAdjust="spacingAndGlyphs">THEME</text>
 <text x="58.0" y="149.3" fill="#d0d0d0" textLength="50.4" lengthAdjust="spacingAndGlyphs">Scheme</text>
 <text x="158.8" y="149.3" fill="#d0d0d0" textLength="100.8" lengthAdjust="spacingAndGlyphs">‹ agnoster ›</text>
@@ -26,108 +26,150 @@
 <text x="158.8" y="185.3" fill="#d0d0d0" textLength="100.8" lengthAdjust="spacingAndGlyphs">‹ nerdfont ›</text>
 <text x="276.4" y="185.3" fill="#d0d0d0" textLength="218.4" lengthAdjust="spacingAndGlyphs">Nerd Font arrows and icons</text>
 <text x="58.0" y="203.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">↺</text>
-<text x="83.2" y="203.3" fill="#d0d0d0" textLength="268.8" lengthAdjust="spacingAndGlyphs">Reset to 'agnoster' (no changes)</text>
+<text x="83.2" y="203.3" fill="#d0d0d0" textLength="319.2" lengthAdjust="spacingAndGlyphs">Reset to 'agnoster' (undo all changes)</text>
 <text x="32.8" y="221.3" fill="#d0d0d0" font-weight="bold" textLength="67.2" lengthAdjust="spacingAndGlyphs">SEGMENTS</text>
-<rect x="738.4" y="226" width="16.8" height="18" fill="#303030"/>
+<rect x="1040.8" y="226" width="16.8" height="18" fill="#303030"/>
 <text x="58.0" y="239.3" fill="#d0d0d0" textLength="109.2" lengthAdjust="spacingAndGlyphs">[✓] user@host</text>
-<text x="780.4" y="239.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
-<rect x="41.2" y="244" width="697.2" height="18" fill="#d0d0d0"/>
-<rect x="738.4" y="244" width="16.8" height="18" fill="#005f87"/>
+<text x="1082.8" y="239.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
+<rect x="41.2" y="244" width="999.6" height="18" fill="#d0d0d0"/>
+<rect x="1040.8" y="244" width="16.8" height="18" fill="#005f87"/>
 <text x="41.2" y="257.3" fill="#1c1c1c" font-weight="bold" textLength="193.2" lengthAdjust="spacingAndGlyphs">▸ [✓] current directory</text>
-<text x="780.4" y="257.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
-<rect x="738.4" y="262" width="16.8" height="18" fill="#008700"/>
+<text x="1082.8" y="257.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
+<rect x="1040.8" y="262" width="16.8" height="18" fill="#008700"/>
 <text x="58.0" y="275.3" fill="#d0d0d0" textLength="176.4" lengthAdjust="spacingAndGlyphs">[✓] git branch/status</text>
-<text x="780.4" y="275.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
-<rect x="738.4" y="280" width="16.8" height="18" fill="#0087ff"/>
-<text x="58.0" y="293.3" fill="#d0d0d0" textLength="117.6" lengthAdjust="spacingAndGlyphs">[✓] model name</text>
-<text x="780.4" y="293.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
-<text x="58.0" y="311.3" fill="#d0d0d0" textLength="134.4" lengthAdjust="spacingAndGlyphs">[✓] effort level</text>
-<text x="780.4" y="311.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
-<rect x="738.4" y="316" width="16.8" height="18" fill="#875f87"/>
-<text x="58.0" y="329.3" fill="#d0d0d0" textLength="336.0" lengthAdjust="spacingAndGlyphs">[ ] output style (only when non-default)</text>
-<text x="780.4" y="329.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
-<text x="58.0" y="347.3" fill="#d0d0d0" textLength="176.4" lengthAdjust="spacingAndGlyphs">[✓] context usage bar</text>
-<text x="780.4" y="347.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
-<text x="91.6" y="365.3" fill="#d0d0d0" textLength="302.4" lengthAdjust="spacingAndGlyphs">[ ] context mood word (Smart → Dumb)</text>
-<text x="58.0" y="383.3" fill="#d0d0d0" textLength="168.0" lengthAdjust="spacingAndGlyphs">[ ] session cost ($)</text>
-<text x="780.4" y="383.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
-<rect x="738.4" y="388" width="16.8" height="18" fill="#585858"/>
-<text x="58.0" y="401.3" fill="#d0d0d0" textLength="168.0" lengthAdjust="spacingAndGlyphs">[ ] session duration</text>
-<text x="780.4" y="401.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
-<text x="32.8" y="419.3" fill="#d0d0d0" font-weight="bold" textLength="100.8" lengthAdjust="spacingAndGlyphs">YOUR SCHEMES</text>
-<text x="58.0" y="437.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">★</text>
-<text x="83.2" y="437.3" fill="#d0d0d0" textLength="252.0" lengthAdjust="spacingAndGlyphs">Save current look as a scheme…</text>
-<text x="58.0" y="455.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">⇧</text>
-<text x="83.2" y="455.3" fill="#d0d0d0" textLength="252.0" lengthAdjust="spacingAndGlyphs">Export current look to a file…</text>
-<text x="58.0" y="473.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">⇩</text>
-<text x="83.2" y="473.3" fill="#d0d0d0" textLength="176.4" lengthAdjust="spacingAndGlyphs">Import a scheme file…</text>
-<text x="797.2" y="473.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">▼</text>
-<text x="32.8" y="509.3" fill="#d0d0d0" font-weight="bold" textLength="100.8" lengthAdjust="spacingAndGlyphs">LIVE PREVIEW</text>
-<text x="150.4" y="509.3" fill="#d0d0d0" textLength="235.2" lengthAdjust="spacingAndGlyphs">clean session · busy session</text>
-<rect x="32.8" y="514" width="142.8" height="18" fill="#303030"/>
-<rect x="175.6" y="514" width="184.8" height="18" fill="#005f87"/>
-<rect x="360.4" y="514" width="75.6" height="18" fill="#008700"/>
-<rect x="436.0" y="514" width="84.0" height="18" fill="#0087ff"/>
-<rect x="520.0" y="514" width="58.8" height="18" fill="#af5f00"/>
-<rect x="578.8" y="514" width="142.8" height="18" fill="#444444"/>
-<text x="41.2" y="527.3" fill="#bcbcbc" textLength="126.0" lengthAdjust="spacingAndGlyphs">dev@workstation</text>
-<polygon points="175.6,514 184.0,523.0 175.6,532" fill="#303030"/>
-<text x="192.4" y="527.3" fill="#eeeeee" textLength="159.6" lengthAdjust="spacingAndGlyphs">.../projects/my-app</text>
-<polygon points="360.4,514 368.8,523.0 360.4,532" fill="#005f87"/>
-<g stroke="#eeeeee" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M379.8,518 V527"/><path d="M383.8,520.4 C383.8,524 379.8,523 379.8,525.5"/><circle cx="379.8" cy="528.2" r="1.6"/><circle cx="383.8" cy="518.8" r="1.6"/></g>
-<text x="394.0" y="527.3" fill="#eeeeee" textLength="33.6" lengthAdjust="spacingAndGlyphs">main</text>
-<polygon points="436.0,514 444.4,523.0 436.0,532" fill="#008700"/>
-<text x="452.8" y="527.3" fill="#eeeeee" textLength="67.2" lengthAdjust="spacingAndGlyphs">Sonnet 5</text>
-<polygon points="520.0,514 528.4,523.0 520.0,532" fill="#0087ff"/>
-<text x="536.8" y="527.3" fill="#eeeeee" textLength="33.6" lengthAdjust="spacingAndGlyphs">high</text>
-<polygon points="578.8,514 587.2,523.0 578.8,532" fill="#af5f00"/>
-<rect x="595.6" y="514" width="8.4" height="18" fill="#00ff00"/>
-<rect x="604.0" y="514" width="8.4" height="18" fill="#5fff00"/>
-<rect x="612.4" y="514" width="8.4" height="18" fill="url(#shade262626)"/>
-<rect x="620.8" y="514" width="8.4" height="18" fill="url(#shade262626)"/>
-<rect x="629.2" y="514" width="8.4" height="18" fill="url(#shade262626)"/>
-<rect x="637.6" y="514" width="8.4" height="18" fill="url(#shade262626)"/>
-<rect x="646.0" y="514" width="8.4" height="18" fill="url(#shade262626)"/>
-<rect x="654.4" y="514" width="8.4" height="18" fill="url(#shade262626)"/>
-<rect x="662.8" y="514" width="8.4" height="18" fill="url(#shade262626)"/>
-<rect x="671.2" y="514" width="8.4" height="18" fill="url(#shade262626)"/>
-<text x="688.0" y="527.3" fill="#eeeeee" textLength="25.2" lengthAdjust="spacingAndGlyphs">25%</text>
-<polygon points="721.6,514 730.0,523.0 721.6,532" fill="#444444"/>
-<rect x="32.8" y="532" width="142.8" height="18" fill="#303030"/>
-<rect x="175.6" y="532" width="184.8" height="18" fill="#005f87"/>
-<rect x="360.4" y="532" width="168.0" height="18" fill="#af5f00"/>
-<rect x="528.4" y="532" width="67.2" height="18" fill="#0087ff"/>
-<rect x="595.6" y="532" width="50.4" height="18" fill="#5f005f"/>
-<rect x="646.0" y="532" width="142.8" height="18" fill="#444444"/>
-<text x="41.2" y="545.3" fill="#bcbcbc" textLength="126.0" lengthAdjust="spacingAndGlyphs">dev@workstation</text>
-<polygon points="175.6,532 184.0,541.0 175.6,550" fill="#303030"/>
-<text x="192.4" y="545.3" fill="#eeeeee" textLength="159.6" lengthAdjust="spacingAndGlyphs">.../projects/webapp</text>
-<polygon points="360.4,532 368.8,541.0 360.4,550" fill="#005f87"/>
-<g stroke="#eeeeee" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M379.8,536 V545"/><path d="M383.8,538.4 C383.8,542 379.8,541 379.8,543.5"/><circle cx="379.8" cy="546.2" r="1.6"/><circle cx="383.8" cy="536.8" r="1.6"/></g>
-<text x="394.0" y="545.3" fill="#eeeeee" textLength="126.0" lengthAdjust="spacingAndGlyphs">feature/login ±</text>
-<polygon points="528.4,532 536.8,541.0 528.4,550" fill="#af5f00"/>
-<text x="545.2" y="545.3" fill="#eeeeee" textLength="50.4" lengthAdjust="spacingAndGlyphs">Opus 5</text>
-<polygon points="595.6,532 604.0,541.0 595.6,550" fill="#0087ff"/>
-<text x="612.4" y="545.3" fill="#eeeeee" textLength="25.2" lengthAdjust="spacingAndGlyphs">max</text>
-<polygon points="646.0,532 654.4,541.0 646.0,550" fill="#5f005f"/>
-<rect x="662.8" y="532" width="8.4" height="18" fill="#00ff00"/>
-<rect x="671.2" y="532" width="8.4" height="18" fill="#5fff00"/>
-<rect x="679.6" y="532" width="8.4" height="18" fill="#87ff00"/>
-<rect x="688.0" y="532" width="8.4" height="18" fill="#afff00"/>
-<rect x="696.4" y="532" width="8.4" height="18" fill="#d7ff00"/>
-<rect x="704.8" y="532" width="8.4" height="18" fill="#ffd700"/>
-<rect x="713.2" y="532" width="8.4" height="18" fill="#ffaf00"/>
-<rect x="721.6" y="532" width="8.4" height="18" fill="#ff8700"/>
-<rect x="730.0" y="532" width="8.4" height="18" fill="#ff5f00"/>
-<rect x="738.4" y="532" width="8.4" height="18" fill="url(#shade262626)"/>
-<text x="755.2" y="545.3" fill="#eeeeee" textLength="25.2" lengthAdjust="spacingAndGlyphs">90%</text>
-<polygon points="788.8,532 797.2,541.0 788.8,550" fill="#444444"/>
-<rect x="16.0" y="568" width="798.0" height="18" fill="#d0d0d0"/>
-<text x="32.8" y="581.3" fill="#1c1c1c" textLength="58.8" lengthAdjust="spacingAndGlyphs">↑↓ move</text>
-<text x="108.4" y="581.3" fill="#1c1c1c" textLength="75.6" lengthAdjust="spacingAndGlyphs">←→ change</text>
-<text x="200.8" y="581.3" fill="#1c1c1c" textLength="100.8" lengthAdjust="spacingAndGlyphs">space toggle</text>
-<text x="318.4" y="581.3" fill="#1c1c1c" textLength="67.2" lengthAdjust="spacingAndGlyphs">c colors</text>
-<text x="402.4" y="581.3" fill="#1c1c1c" textLength="109.2" lengthAdjust="spacingAndGlyphs">s save scheme</text>
-<text x="528.4" y="581.3" fill="#1c1c1c" textLength="117.6" lengthAdjust="spacingAndGlyphs">v full preview</text>
-<text x="662.8" y="581.3" fill="#1c1c1c" textLength="50.4" lengthAdjust="spacingAndGlyphs">q quit</text>
+<text x="1082.8" y="275.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
+<rect x="1040.8" y="280" width="16.8" height="18" fill="#875f87"/>
+<text x="58.0" y="293.3" fill="#d0d0d0" textLength="277.2" lengthAdjust="spacingAndGlyphs">[✓] pull request and review state</text>
+<text x="1082.8" y="293.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
+<rect x="1040.8" y="298" width="16.8" height="18" fill="#585858"/>
+<text x="58.0" y="311.3" fill="#d0d0d0" textLength="134.4" lengthAdjust="spacingAndGlyphs">[ ] session name</text>
+<text x="1082.8" y="311.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
+<rect x="1040.8" y="316" width="16.8" height="18" fill="#0087ff"/>
+<text x="58.0" y="329.3" fill="#d0d0d0" textLength="117.6" lengthAdjust="spacingAndGlyphs">[✓] model name</text>
+<text x="1082.8" y="329.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
+<text x="58.0" y="347.3" fill="#d0d0d0" textLength="134.4" lengthAdjust="spacingAndGlyphs">[✓] effort level</text>
+<text x="1082.8" y="347.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
+<rect x="1040.8" y="352" width="16.8" height="18" fill="#303030"/>
+<text x="58.0" y="365.3" fill="#d0d0d0" textLength="277.2" lengthAdjust="spacingAndGlyphs">[ ] fast mode, vim mode and agent</text>
+<text x="1082.8" y="365.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
+<rect x="1040.8" y="370" width="16.8" height="18" fill="#875f87"/>
+<text x="58.0" y="383.3" fill="#d0d0d0" textLength="336.0" lengthAdjust="spacingAndGlyphs">[ ] output style (only when non-default)</text>
+<text x="1082.8" y="383.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
+<text x="58.0" y="401.3" fill="#d0d0d0" textLength="176.4" lengthAdjust="spacingAndGlyphs">[✓] context usage bar</text>
+<text x="1082.8" y="401.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
+<text x="91.6" y="419.3" fill="#d0d0d0" textLength="302.4" lengthAdjust="spacingAndGlyphs">[ ] context mood word (Smart → Dumb)</text>
+<text x="58.0" y="437.3" fill="#d0d0d0" textLength="285.6" lengthAdjust="spacingAndGlyphs">[✓] plan usage limits (5h, weekly)</text>
+<text x="1082.8" y="437.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
+<text x="58.0" y="455.3" fill="#d0d0d0" textLength="168.0" lengthAdjust="spacingAndGlyphs">[ ] session cost ($)</text>
+<text x="1082.8" y="455.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
+<text x="58.0" y="473.3" fill="#d0d0d0" textLength="327.6" lengthAdjust="spacingAndGlyphs">[ ] prompt cache (hit ratio, warm/cold)</text>
+<text x="1082.8" y="473.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
+<rect x="1040.8" y="478" width="16.8" height="18" fill="#303030"/>
+<text x="58.0" y="491.3" fill="#d0d0d0" textLength="193.2" lengthAdjust="spacingAndGlyphs">[ ] lines added/removed</text>
+<text x="1082.8" y="491.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
+<rect x="1040.8" y="496" width="16.8" height="18" fill="#585858"/>
+<text x="58.0" y="509.3" fill="#d0d0d0" textLength="168.0" lengthAdjust="spacingAndGlyphs">[ ] session duration</text>
+<text x="1082.8" y="509.3" fill="#d0d0d0" textLength="25.2" lengthAdjust="spacingAndGlyphs">[c]</text>
+<text x="32.8" y="527.3" fill="#d0d0d0" font-weight="bold" textLength="100.8" lengthAdjust="spacingAndGlyphs">YOUR SCHEMES</text>
+<text x="58.0" y="545.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">★</text>
+<text x="83.2" y="545.3" fill="#d0d0d0" textLength="252.0" lengthAdjust="spacingAndGlyphs">Save current look as a scheme…</text>
+<text x="58.0" y="563.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">⇧</text>
+<text x="83.2" y="563.3" fill="#d0d0d0" textLength="252.0" lengthAdjust="spacingAndGlyphs">Export current look to a file…</text>
+<text x="58.0" y="581.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">⇩</text>
+<text x="83.2" y="581.3" fill="#d0d0d0" textLength="176.4" lengthAdjust="spacingAndGlyphs">Import a scheme file…</text>
+<text x="58.0" y="599.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">✕</text>
+<text x="83.2" y="599.3" fill="#d0d0d0" textLength="184.8" lengthAdjust="spacingAndGlyphs">Delete a saved scheme…</text>
+<text x="32.8" y="617.3" fill="#d0d0d0" font-weight="bold" textLength="58.8" lengthAdjust="spacingAndGlyphs">ACTIONS</text>
+<text x="58.0" y="635.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">▶</text>
+<text x="83.2" y="635.3" fill="#d0d0d0" textLength="378.0" lengthAdjust="spacingAndGlyphs">Full-screen preview (all samples, true color)</text>
+<text x="58.0" y="653.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">⤓</text>
+<text x="83.2" y="653.3" fill="#d0d0d0" textLength="336.0" lengthAdjust="spacingAndGlyphs">Install — write statusline + register it</text>
+<text x="58.0" y="671.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">✗</text>
+<text x="83.2" y="671.3" fill="#d0d0d0" textLength="403.2" lengthAdjust="spacingAndGlyphs">Uninstall — remove statusLine from settings.json</text>
+<text x="58.0" y="689.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">⮐</text>
+<text x="83.2" y="689.3" fill="#d0d0d0" textLength="294.0" lengthAdjust="spacingAndGlyphs">Save selections &amp; quit (no install)</text>
+<text x="58.0" y="707.3" fill="#d0d0d0" textLength="8.4" lengthAdjust="spacingAndGlyphs">⏻</text>
+<text x="83.2" y="707.3" fill="#d0d0d0" textLength="159.6" lengthAdjust="spacingAndGlyphs">Exit without saving</text>
+<text x="32.8" y="761.3" fill="#d0d0d0" font-weight="bold" textLength="100.8" lengthAdjust="spacingAndGlyphs">LIVE PREVIEW</text>
+<text x="150.4" y="761.3" fill="#d0d0d0" textLength="235.2" lengthAdjust="spacingAndGlyphs">clean session · busy session</text>
+<rect x="32.8" y="766" width="142.8" height="18" fill="#303030"/>
+<rect x="175.6" y="766" width="168.0" height="18" fill="#005f87"/>
+<rect x="343.6" y="766" width="75.6" height="18" fill="#008700"/>
+<rect x="419.2" y="766" width="84.0" height="18" fill="#0087ff"/>
+<rect x="503.2" y="766" width="58.8" height="18" fill="#af5f00"/>
+<rect x="562.0" y="766" width="142.8" height="18" fill="#444444"/>
+<rect x="704.8" y="766" width="277.2" height="18" fill="#008700"/>
+<text x="41.2" y="779.3" fill="#bcbcbc" textLength="126.0" lengthAdjust="spacingAndGlyphs">dev@workstation</text>
+<polygon points="175.6,766 184.0,775.0 175.6,784" fill="#303030"/>
+<text x="192.4" y="779.3" fill="#eeeeee" textLength="142.8" lengthAdjust="spacingAndGlyphs">~/projects/my-app</text>
+<polygon points="343.6,766 352.0,775.0 343.6,784" fill="#005f87"/>
+<g stroke="#eeeeee" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M363.0,770 V779"/><path d="M367.0,772.4 C367.0,776 363.0,775 363.0,777.5"/><circle cx="363.0" cy="780.2" r="1.6"/><circle cx="367.0" cy="770.8" r="1.6"/></g>
+<text x="377.2" y="779.3" fill="#eeeeee" textLength="33.6" lengthAdjust="spacingAndGlyphs">main</text>
+<polygon points="419.2,766 427.6,775.0 419.2,784" fill="#008700"/>
+<text x="436.0" y="779.3" fill="#eeeeee" textLength="67.2" lengthAdjust="spacingAndGlyphs">Sonnet 5</text>
+<polygon points="503.2,766 511.6,775.0 503.2,784" fill="#0087ff"/>
+<text x="520.0" y="779.3" fill="#eeeeee" textLength="33.6" lengthAdjust="spacingAndGlyphs">high</text>
+<polygon points="562.0,766 570.4,775.0 562.0,784" fill="#af5f00"/>
+<rect x="578.8" y="766" width="8.4" height="18" fill="#00ff00"/>
+<rect x="587.2" y="766" width="8.4" height="18" fill="#5fff00"/>
+<rect x="595.6" y="766" width="8.4" height="18" fill="url(#shade262626)"/>
+<rect x="604.0" y="766" width="8.4" height="18" fill="url(#shade262626)"/>
+<rect x="612.4" y="766" width="8.4" height="18" fill="url(#shade262626)"/>
+<rect x="620.8" y="766" width="8.4" height="18" fill="url(#shade262626)"/>
+<rect x="629.2" y="766" width="8.4" height="18" fill="url(#shade262626)"/>
+<rect x="637.6" y="766" width="8.4" height="18" fill="url(#shade262626)"/>
+<rect x="646.0" y="766" width="8.4" height="18" fill="url(#shade262626)"/>
+<rect x="654.4" y="766" width="8.4" height="18" fill="url(#shade262626)"/>
+<text x="671.2" y="779.3" fill="#eeeeee" textLength="25.2" lengthAdjust="spacingAndGlyphs">25%</text>
+<polygon points="704.8,766 713.2,775.0 704.8,784" fill="#444444"/>
+<text x="721.6" y="779.3" fill="#eeeeee" textLength="117.6" lengthAdjust="spacingAndGlyphs">5h 23% (2h14m)</text>
+<polygon points="847.6,766 856.0,775.0 847.6,784" fill="#008700"/>
+<text x="864.4" y="779.3" fill="#eeeeee" textLength="109.2" lengthAdjust="spacingAndGlyphs">7d 41% (3d4h)</text>
+<polygon points="982.0,766 990.4,775.0 982.0,784" fill="#008700"/>
+<rect x="32.8" y="784" width="142.8" height="18" fill="#303030"/>
+<rect x="175.6" y="784" width="168.0" height="18" fill="#005f87"/>
+<rect x="343.6" y="784" width="168.0" height="18" fill="#af5f00"/>
+<rect x="511.6" y="784" width="67.2" height="18" fill="#875f87"/>
+<rect x="578.8" y="784" width="67.2" height="18" fill="#0087ff"/>
+<rect x="646.0" y="784" width="50.4" height="18" fill="#5f005f"/>
+<rect x="696.4" y="784" width="142.8" height="18" fill="#444444"/>
+<rect x="839.2" y="784" width="126.0" height="18" fill="#d70000"/>
+<rect x="965.2" y="784" width="134.4" height="18" fill="#d75f00"/>
+<text x="41.2" y="797.3" fill="#bcbcbc" textLength="126.0" lengthAdjust="spacingAndGlyphs">dev@workstation</text>
+<polygon points="175.6,784 184.0,793.0 175.6,802" fill="#303030"/>
+<text x="192.4" y="797.3" fill="#eeeeee" textLength="142.8" lengthAdjust="spacingAndGlyphs">~/projects/webapp</text>
+<polygon points="343.6,784 352.0,793.0 343.6,802" fill="#005f87"/>
+<g stroke="#eeeeee" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M363.0,788 V797"/><path d="M367.0,790.4 C367.0,794 363.0,793 363.0,795.5"/><circle cx="363.0" cy="798.2" r="1.6"/><circle cx="367.0" cy="788.8" r="1.6"/></g>
+<text x="377.2" y="797.3" fill="#eeeeee" textLength="126.0" lengthAdjust="spacingAndGlyphs">feature/login ±</text>
+<polygon points="511.6,784 520.0,793.0 511.6,802" fill="#af5f00"/>
+<text x="528.4" y="797.3" fill="#eeeeee" textLength="42.0" lengthAdjust="spacingAndGlyphs">#42 ✗</text>
+<polygon points="578.8,784 587.2,793.0 578.8,802" fill="#875f87"/>
+<text x="595.6" y="797.3" fill="#eeeeee" textLength="50.4" lengthAdjust="spacingAndGlyphs">Opus 5</text>
+<polygon points="646.0,784 654.4,793.0 646.0,802" fill="#0087ff"/>
+<text x="662.8" y="797.3" fill="#eeeeee" textLength="25.2" lengthAdjust="spacingAndGlyphs">max</text>
+<polygon points="696.4,784 704.8,793.0 696.4,802" fill="#5f005f"/>
+<rect x="713.2" y="784" width="8.4" height="18" fill="#00ff00"/>
+<rect x="721.6" y="784" width="8.4" height="18" fill="#5fff00"/>
+<rect x="730.0" y="784" width="8.4" height="18" fill="#87ff00"/>
+<rect x="738.4" y="784" width="8.4" height="18" fill="#afff00"/>
+<rect x="746.8" y="784" width="8.4" height="18" fill="#d7ff00"/>
+<rect x="755.2" y="784" width="8.4" height="18" fill="#ffd700"/>
+<rect x="763.6" y="784" width="8.4" height="18" fill="#ffaf00"/>
+<rect x="772.0" y="784" width="8.4" height="18" fill="#ff8700"/>
+<rect x="780.4" y="784" width="8.4" height="18" fill="#ff5f00"/>
+<rect x="788.8" y="784" width="8.4" height="18" fill="url(#shade262626)"/>
+<text x="805.6" y="797.3" fill="#eeeeee" textLength="25.2" lengthAdjust="spacingAndGlyphs">90%</text>
+<polygon points="839.2,784 847.6,793.0 839.2,802" fill="#444444"/>
+<text x="856.0" y="797.3" fill="#eeeeee" textLength="100.8" lengthAdjust="spacingAndGlyphs">5h 92% (38m)</text>
+<polygon points="965.2,784 973.6,793.0 965.2,802" fill="#d70000"/>
+<text x="982.0" y="797.3" fill="#eeeeee" textLength="109.2" lengthAdjust="spacingAndGlyphs">7d 78% (1d9h)</text>
+<polygon points="1099.6,784 1108.0,793.0 1099.6,802" fill="#d75f00"/>
+<rect x="16.0" y="820" width="1100.4" height="18" fill="#d0d0d0"/>
+<text x="32.8" y="833.3" fill="#1c1c1c" textLength="58.8" lengthAdjust="spacingAndGlyphs">↑↓ move</text>
+<text x="108.4" y="833.3" fill="#1c1c1c" textLength="75.6" lengthAdjust="spacingAndGlyphs">←→ change</text>
+<text x="200.8" y="833.3" fill="#1c1c1c" textLength="100.8" lengthAdjust="spacingAndGlyphs">space toggle</text>
+<text x="318.4" y="833.3" fill="#1c1c1c" textLength="67.2" lengthAdjust="spacingAndGlyphs">c colors</text>
+<text x="402.4" y="833.3" fill="#1c1c1c" textLength="109.2" lengthAdjust="spacingAndGlyphs">s save scheme</text>
+<text x="528.4" y="833.3" fill="#1c1c1c" textLength="117.6" lengthAdjust="spacingAndGlyphs">v full preview</text>
+<text x="662.8" y="833.3" fill="#1c1c1c" textLength="50.4" lengthAdjust="spacingAndGlyphs">q quit</text>
 </svg>
