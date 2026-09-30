@@ -96,3 +96,66 @@ def test_cli_reports_install_errors_without_a_traceback(claude_dir, capsys, monk
 
     assert main(["install"]) == EXIT_ERROR
     assert "not valid JSON" in capsys.readouterr().err
+
+
+def test_reinstall_replaces_the_script_atomically(claude_dir, config):
+    # Regression: the script was rewritten in place, so Claude Code could run a
+    # half-written file and show a blank or stale statusline until the next save.
+    install(config)
+    script = claude_dir / "statusline-command.sh"
+    before = script.stat().st_ino
+    with open(script, encoding="utf-8") as running:
+        original = running.read()
+        running.seek(0)
+
+        install({**config, "labels": True})
+
+        assert running.read() == original  # a run already in progress keeps reading a whole script
+    assert script.stat().st_ino != before
+    assert script.stat().st_mode & 0o777 == 0o755
+    assert "model %s" in script.read_text()
+
+
+def test_reinstall_rewrites_settings_so_claude_code_refreshes_right_away(claude_dir, config):
+    # Claude Code re-runs the statusline when settings.json changes; an unchanged
+    # file meant the running session kept the old look until the next event.
+    install(config)
+    settings = claude_dir / "settings.json"
+    before = settings.stat().st_ino
+
+    install(config)
+
+    assert settings.stat().st_ino != before
+    assert _settings(claude_dir)["statusLine"]["command"] == str(claude_dir / "statusline-command.sh")
+
+
+def test_install_leaves_no_temporary_files_behind(claude_dir, config):
+    install(config)
+    install(config)
+
+    assert sorted(p.name for p in claude_dir.iterdir()) == ["settings.json", "statusline-command.sh"]
+
+
+def test_rewriting_settings_keeps_their_permissions(claude_dir, config):
+    claude_dir.mkdir()
+    settings = claude_dir / "settings.json"
+    settings.write_text("{}")
+    settings.chmod(0o644)
+
+    install(config)
+
+    assert settings.stat().st_mode & 0o777 == 0o644
+
+
+def test_a_symlinked_settings_file_stays_a_symlink(claude_dir, config, tmp_path):
+    # dotfile managers (stow, chezmoi symlink mode) link settings.json into ~/.claude
+    claude_dir.mkdir()
+    real = tmp_path / "dotfiles" / "settings.json"
+    real.parent.mkdir()
+    real.write_text(json.dumps({"model": "opus"}))
+    (claude_dir / "settings.json").symlink_to(real)
+
+    install(config)
+
+    assert (claude_dir / "settings.json").is_symlink()
+    assert json.loads(real.read_text())["statusLine"]["type"] == "command"
