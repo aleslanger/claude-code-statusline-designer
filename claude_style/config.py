@@ -15,6 +15,7 @@ SEGMENT_ORDER = [
     "session",
     "model",
     "effort",
+    "thinking",
     "mode",
     "output_style",
     "context",
@@ -33,6 +34,7 @@ SEGMENT_LABELS = {
     "session": "session name",
     "model": "model name",
     "effort": "effort level",
+    "thinking": "extended thinking on/off",
     "mode": "fast mode, vim mode and agent",
     "output_style": "output style (only when non-default)",
     "context": "context usage bar",
@@ -72,9 +74,36 @@ COLOR_FIELDS = {
     "limits": [("fg", "text"), ("colors.ok", "ok"), ("colors.warn", "warn"), ("colors.crit", "critical")],
     "cost": [("fg", "text"), ("colors.normal", "normal"), ("colors.warn", "warn")],
     "cache": [("fg", "text"), ("colors.warm", "warm"), ("colors.cold", "cold")],
+    "thinking": [("fg", "text"), ("colors.on", "on"), ("colors.off", "off")],
     "lines": [("bg", "background"), ("fg", "text")],
     "duration": [("bg", "background"), ("fg", "text")],
 }
+
+
+# Short names printed before each value when labels are on. Segments whose
+# text already says what it is (cache, thinking) have none.
+SEGMENT_TAGS = {
+    "user_host": "user",
+    "dir": "dir",
+    "git": "git",
+    "pr": "PR",
+    "session": "session",
+    "model": "model",
+    "effort": "effort",
+    "mode": "mode",
+    "output_style": "style",
+    "context": "ctx",
+    "limits": "limit",
+    "cost": "cost",
+    "lines": "lines",
+    "duration": "time",
+}
+
+
+def segment_tag(config: dict, segment: str) -> str:
+    """The label and a trailing space for a segment, or "" when labels are off."""
+    tag = SEGMENT_TAGS.get(segment)
+    return f"{tag} " if config["labels"] and tag else ""
 
 
 def _walk_color_path(config: dict, segment: str, path: str) -> tuple[object, str]:
@@ -110,6 +139,8 @@ DEFAULT_CONFIG = {
     "based_on": None,  # scheme a "custom" config was derived from; what Reset returns to
     "separator": "powerline",  # "powerline" or "plain"
     "glyphs": "nerdfont",  # "nerdfont", "unicode" (no Nerd Font needed) or "ascii"
+    "labels": False,  # print a short name before each value, e.g. "ctx", "cost"
+    "wrap": True,  # move segments to further rows when they don't fit into $COLUMNS
     "segments": {
         "user_host": {"enabled": True, "bg": 236, "fg": 250},
         "dir": {
@@ -173,6 +204,7 @@ DEFAULT_CONFIG = {
         "lines": {"enabled": False, "bg": 236, "fg": 250, "hide_zero": True},
         "session": {"enabled": False, "bg": 240, "fg": 255, "max_length": 24},
         "mode": {"enabled": False, "bg": 236, "fg": 250},
+        "thinking": {"enabled": False, "fg": 255, "colors": {"on": 22, "off": 239}},
         "cache": {
             "enabled": False,
             "fg": 255,

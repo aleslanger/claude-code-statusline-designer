@@ -84,7 +84,8 @@ def _segment_rows() -> list[tuple[str, str | None]]:
 
 
 _ROWS = (
-    [("section", "Theme"), ("preset", None), ("separator", None), ("glyphs", None), ("reset", None)]
+    [("section", "Theme"), ("preset", None), ("separator", None), ("glyphs", None)]
+    + [("option", "labels"), ("option", "wrap"), ("reset", None)]
     + [("section", "Segments")]
     + _segment_rows()
     + [("section", "Your schemes")]
@@ -92,6 +93,11 @@ _ROWS = (
     + [("section", "Actions")]
     + [("preview", None), ("install", None), ("uninstall", None), ("quit", None), ("exit", None)]
 )
+
+OPTION_TEXT = {
+    "labels": "Labels      show a name before each value (ctx, cost, time…)",
+    "wrap": "Wrap        continue on a second row when the line doesn't fit",
+}
 
 _STATIC_ROW_TEXT = {
     "save_scheme": "★  Save current look as a scheme…",
@@ -156,6 +162,9 @@ def _row_text(kind: str, key: str | None, config: dict) -> str:
         return f"Glyphs      ‹ {config['glyphs']} ›  {GLYPH_MODE_LABELS[config['glyphs']]}"
     if kind == "reset":
         return _reset_row_text(config)
+    if kind == "option":
+        mark = "✓" if config[key] else " "
+        return f"[{mark}] {OPTION_TEXT[key]}"
     if kind == "state_word":
         mark = "✓" if config["segments"]["context"]["state_word"] else " "
         return f"    [{mark}] context mood word (Smart → Dumb)"
@@ -475,6 +484,8 @@ def _cycle_scheme(config: dict, step: int, state: MenuState) -> dict | None:
 def _handle_activate(stdscr, kind: str, key: str | None, config: dict, state: MenuState) -> tuple[str | None, dict]:
     if kind == "segment":
         config["segments"][key]["enabled"] = not config["segments"][key]["enabled"]
+    elif kind == "option":
+        config[key] = not config[key]
     elif kind == "state_word":
         ctx = config["segments"]["context"]
         ctx["state_word"] = not ctx["state_word"]

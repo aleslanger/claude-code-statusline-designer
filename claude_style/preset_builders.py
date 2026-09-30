@@ -56,10 +56,11 @@ def extras(output_style: tuple[int, int], cost_: dict, duration: tuple[int, int]
 def usage_extras(segments: dict) -> dict:
     """Colors for the usage and session segments, borrowed from ones the theme already tunes.
 
-    Limits reuse the context thresholds (green -> amber -> red), cache the
-    effort text on its low (warm) and default (cold) colors, pr the output
-    style, session the duration, lines and mode user@host. None of them sits
-    next to its donor.
+    Limits reuse the context thresholds (green -> amber -> red), cache and
+    thinking the effort text on its low (warm / on) and default (cold / off)
+    colors, pr the output
+    style, session the duration, lines and mode user@host. Only thinking can
+    sit next to its donor (effort "low"); the layout then draws a thin divider.
     """
     ctx, effort_ = segments["context"], segments["effort"]
     ok, warn, crit = (color for _limit, color in ctx["thresholds"])
@@ -67,12 +68,14 @@ def usage_extras(segments: dict) -> dict:
     def pair(donor: str) -> dict:
         return {"bg": segments[donor]["bg"], "fg": segments[donor]["fg"]}
 
+    effort_pair = {"on": effort_["colors"]["low"], "off": effort_["colors"]["default"]}
     return {
         "pr": pair("output_style"),
         "session": pair("duration"),
         "mode": pair("user_host"),
         "limits": {"fg": ctx["fg"], "colors": {"ok": ok, "warn": warn, "crit": crit}},
-        "cache": {"fg": effort_["fg"], "colors": {"warm": effort_["colors"]["low"], "cold": effort_["colors"]["default"]}},
+        "cache": {"fg": effort_["fg"], "colors": {"warm": effort_pair["on"], "cold": effort_pair["off"]}},
+        "thinking": {"fg": effort_["fg"], "colors": effort_pair},
         "lines": pair("user_host"),
     }
 

@@ -28,6 +28,7 @@ UNICODE_PR_STATES = {
 GLYPHS = {
     "nerdfont": {
         "sep": r"$'\xee\x82\xb0'",  # U+E0B0 powerline arrow
+        "sep_thin": r"$'\xee\x82\xb1'",  # U+E0B1 thin arrow between two equal backgrounds
         "branch": r"$'\xef\x90\x9c '",  # U+F41C git branch icon
         "dirty": r"$' \xc2\xb1'",  # ±
         "full": r"$'\xe2\x96\x88'",  # █
@@ -36,6 +37,7 @@ GLYPHS = {
     },
     "unicode": {
         "sep": r"$'\xe2\x96\x8c'",  # ▌ flat segment edge
+        "sep_thin": r"$'\xe2\x94\x82'",  # │
         "branch": r"$'\xe2\x8e\x87 '",  # ⎇
         "dirty": r"$' \xc2\xb1'",
         "full": r"$'\xe2\x96\x88'",
@@ -44,6 +46,7 @@ GLYPHS = {
     },
     "ascii": {
         "sep": "''",
+        "sep_thin": "'|'",
         "branch": "''",
         "dirty": "' *'",
         "full": "'#'",

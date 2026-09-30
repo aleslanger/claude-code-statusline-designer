@@ -10,7 +10,7 @@ MIN_SUBTLE_CONTRAST = 1.4  # empty bar blocks are meant to be quiet, not invisib
 DARK_TERMINAL_BG = 234
 LIGHT_TERMINAL_BG = 231
 SIMPLE_SEGMENTS = ("user_host", "dir", "pr", "session", "model", "mode", "output_style", "lines", "duration")
-STATUS_SEGMENTS = ("limits", "cost", "cache")  # one text color over a background that tracks a status
+STATUS_SEGMENTS = ("limits", "cost", "cache", "thinking")  # one text color over a background that tracks a status
 
 
 class Issue(NamedTuple):

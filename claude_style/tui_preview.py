@@ -18,7 +18,8 @@ LIVE_SAMPLE_COUNT = 2  # clean session + busy session (dirty repo, max effort, 9
 TITLE = "LIVE PREVIEW"
 SUBTITLE = "clean session · busy session"
 LEFT_MARGIN = 2
-BLOCK_ROWS = 1 + 1 + LIVE_SAMPLE_COUNT  # blank spacer + title + samples
+ROWS_PER_SAMPLE = 2  # a statusline that doesn't fit the width wraps onto a second row
+BLOCK_ROWS = 1 + 1 + LIVE_SAMPLE_COUNT * ROWS_PER_SAMPLE  # blank spacer + title + samples
 
 
 class LivePreview:
@@ -66,11 +67,16 @@ def draw(stdscr, live: LivePreview, config: dict, top: int, bottom: int) -> None
 
     error_pair = pair(curses.COLOR_WHITE, ERROR_BG)
     error_attr = curses.color_pair(error_pair) if error_pair is not None else curses.A_REVERSE
-    for offset, result in enumerate(live.results(config, width - LEFT_MARGIN)):
-        y = top + 1 + offset
-        if y >= bottom:
-            return
+    y = top + 1
+    for result in live.results(config, width - LEFT_MARGIN):
         if result.error:
+            if y >= bottom:
+                return
             addstr(stdscr, y, LEFT_MARGIN, f" script error: {result.error.splitlines()[0]} ", error_attr)
-        else:
-            _draw_runs(stdscr, y, LEFT_MARGIN, ansi.parse(result.output))
+            y += 1
+            continue
+        for row in result.output.split("\n")[:ROWS_PER_SAMPLE]:
+            if y >= bottom:
+                return
+            _draw_runs(stdscr, y, LEFT_MARGIN, ansi.parse(row))
+            y += 1

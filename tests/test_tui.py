@@ -201,3 +201,11 @@ def test_ctrl_c_exits_cleanly_with_130(tui):
 
     assert tui.finish() == 130
     assert "Traceback" not in "\n".join(tui.screen.display)
+
+
+def test_labels_row_adds_names_to_the_preview(tui):
+    tui.select_row("Labels")
+    tui.send(" ")
+
+    assert "[✓]" in tui.selected_line()
+    assert "model Sonnet 5" in tui.screen.display[tui.preview_row()]

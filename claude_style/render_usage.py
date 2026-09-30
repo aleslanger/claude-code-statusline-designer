@@ -39,7 +39,7 @@ def draw(color: str, fg: int, text: str, args: str, powerline: bool) -> list[str
     return ["  plain_join", f"  fg {color}; printf '{text}' {args}; printf \"$RESET\""]
 
 
-def limits_segment(limits: dict, powerline: bool) -> list[str]:
+def limits_segment(limits: dict, powerline: bool, tag: str = "") -> list[str]:
     warn, crit = limits["thresholds"]
     colors = limits["colors"]
     lines = [
@@ -58,24 +58,24 @@ def limits_segment(limits: dict, powerline: bool) -> list[str]:
         f'  if [ "$pct" -ge {crit} ]; then C_LIM={colors["crit"]}',
         f'  elif [ "$pct" -ge {warn} ]; then C_LIM={colors["warn"]}',
         f'  else C_LIM={colors["ok"]}; fi',
-        *draw('"$C_LIM"', limits["fg"], "%s %d%%%s", '"$2" "$pct" "$left"', powerline),
+        *draw('"$C_LIM"', limits["fg"], f"{tag}%s %d%%%s", '"$2" "$pct" "$left"', powerline),
         "}",
     ]
     return lines + [f"limit_window {key} {label}" for key, label in LIMIT_WINDOWS]
 
 
-def lines_segment(seg: dict, powerline: bool) -> list[str]:
+def lines_segment(seg: dict, powerline: bool, tag: str = "") -> list[str]:
     guard = '[ "$lines_added" -gt 0 ] || [ "$lines_removed" -gt 0 ]' if seg["hide_zero"] else "true"
     return [
         "lines_added=$(echo \"$input\" | jq -r '(.cost.total_lines_added | numbers | floor) // 0')",
         "lines_removed=$(echo \"$input\" | jq -r '(.cost.total_lines_removed | numbers | floor) // 0')",
         f"if {guard}; then",
-        *draw(str(seg["bg"]), seg["fg"], "+%d -%d", '"$lines_added" "$lines_removed"', powerline),
+        *draw(str(seg["bg"]), seg["fg"], f"{tag}+%d -%d", '"$lines_added" "$lines_removed"', powerline),
         "fi",
     ]
 
 
-def pr_segment(seg: dict, powerline: bool) -> list[str]:
+def pr_segment(seg: dict, powerline: bool, tag: str = "") -> list[str]:
     cases = [f'  {state}) pr_glyph=" {glyph}" ;;' for state, glyph in PR_STATE_GLYPHS.items()]
     return [
         "pr_number=$(echo \"$input\" | jq -r '.pr.number | numbers | floor')",
@@ -86,6 +86,6 @@ def pr_segment(seg: dict, powerline: bool) -> list[str]:
         "  case \"$(echo \"$input\" | jq -r '.pr.review_state // empty')\" in",
         *cases,
         "  esac",
-        *draw(str(seg["bg"]), seg["fg"], "%s%d%s", '"$pr_prefix" "$pr_number" "$pr_glyph"', powerline),
+        *draw(str(seg["bg"]), seg["fg"], f"{tag}%s%d%s", '"$pr_prefix" "$pr_number" "$pr_glyph"', powerline),
         "fi",
     ]

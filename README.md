@@ -154,6 +154,7 @@ version with `claude-style --version`.
 | `↑` `↓` | everywhere | Move between rows or fields |
 | `←` `→` | Scheme / Separator / Glyphs | Cycle themes (each dark theme is followed by its light variant), separator style or glyph set |
 | `space` / `enter` | segment row | Turn a segment on or off |
+| `space` / `enter` | Labels / Wrap | Name each value (`ctx`, `cost`, `time`…) / let a long statusline continue on a second row |
 | `c` | segment row | Open the segment's color editor |
 | `←` `→` / `PgUp` `PgDn` | color editor | Nudge the color code by 1 / 16 |
 | `enter` | color editor | Open the 256-color palette; the preview follows the hovered color |
@@ -186,7 +187,7 @@ Everything in the designer is also scriptable:
 | `claude-style preview` | Render the sample statuslines in this terminal |
 | `claude-style presets` | List built-in themes and your schemes |
 | `claude-style preset <name>` | Switch theme (`nord`, `gruvbox-light`, one of yours, …) |
-| `claude-style toggle <segment> on\|off` | Show or hide a segment (`context-word` toggles the mood word) |
+| `claude-style toggle <segment> on\|off` | Show or hide a segment (`context-word` toggles the mood word, `labels` the value names, `wrap` the second row) |
 | `claude-style glyphs nerdfont\|unicode\|ascii` | Glyph set: Nerd Font icons, plain Unicode, or ASCII only |
 | `claude-style separator powerline\|plain` | Powerline arrows or plain `\|` separators |
 | `claude-style color list` | Every editable color, with its code and hex value |
@@ -213,6 +214,7 @@ The Makefile wraps the common ones: `make menu`, `make preview`,
 | `session` | Session name set with `/rename` or `--name`, or the generated title; shortened to 24 characters | off |
 | `model` | Model name, e.g. `Opus 5` | on |
 | `effort` | Effort level, colored from `low` (green) to `max` | on |
+| `thinking` | Whether extended thinking is on: `think on` / `think off`, each in its own color | off |
 | `context` | Context-window usage as a 10-block bar or a percentage, optionally with a mood word (`Smart` … `Dumb`) | on |
 | `mode` | What is switched on: `fast` mode, the vim mode (`NORMAL`, `INSERT`, …) and the `--agent` name, e.g. `fast NORMAL @reviewer`; hidden when none is | off |
 | `output_style` | Output style, shown only when it isn't `default` | off |
@@ -233,6 +235,18 @@ countdown updates whenever Claude Code refreshes the statusline. To keep it
 ticking while the session is idle, add `"refreshInterval": 60` to the
 `statusLine` entry in `~/.claude/settings.json`. The same applies to the
 `cache` countdown.
+
+When two neighbouring segments end up with the same background (for example
+both limits under the warn threshold), a thin divider is drawn between them
+instead of an arrow that would disappear into the color.
+
+When the whole line is wider than the terminal (`$COLUMNS`, which Claude Code
+sets), the segments continue on a second row. A segment is never split. Turn
+this off with **Wrap** in the designer or `claude-style toggle wrap off`.
+
+**Labels** put a short name before each value, e.g.
+`model Opus 5 │ effort high │ ctx ██████░░░░ 60% │ cost $1.20 │ time 12m`.
+They are off by default.
 
 With the `mode` segment on, you can add `"hideVimModeIndicator": true` to the
 same entry so the vim mode is not shown twice.

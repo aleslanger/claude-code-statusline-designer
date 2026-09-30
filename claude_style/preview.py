@@ -41,6 +41,7 @@ SAMPLES = [
             "model": {"display_name": "Sonnet 5"},
             "context_window": {"used_percentage": 25},
             "effort": {"level": "high"},
+            "thinking": {"enabled": False},
             "cost": {
                 "total_cost_usd": 0.42,
                 "total_duration_ms": 12 * 60 * 1000,
@@ -66,6 +67,7 @@ SAMPLES = [
             "model": {"display_name": "Opus 5"},
             "context_window": {"used_percentage": 90},
             "effort": {"level": "max"},
+            "thinking": {"enabled": True},
             "output_style": {"name": "plan"},
             "cost": {
                 "total_cost_usd": 7.80,

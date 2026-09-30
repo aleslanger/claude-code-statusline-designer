@@ -1,4 +1,4 @@
-"""Bash for the segments that describe the session: prompt cache, session name and active modes.
+"""Bash for the segments that describe the session: prompt cache, session name, thinking and active modes.
 
 Session and agent names are free text, so jq strips control characters before
 they reach the terminal (no smuggled escape sequences) and shortens them. The
@@ -43,17 +43,17 @@ def cache_segment(cache: dict, powerline: bool) -> list[str]:
     ]
 
 
-def session_segment(seg: dict, powerline: bool) -> list[str]:
+def session_segment(seg: dict, powerline: bool, tag: str = "") -> list[str]:
     name_filter = _clean_text(seg["max_length"])
     return [
         f"session_name=$(echo \"$input\" | jq -r --arg e \"$G_ELLIPSIS\" '.session_name | {name_filter}')",
         'if [ -n "$session_name" ]; then',
-        *draw(str(seg["bg"]), seg["fg"], "%s", '"$session_name"', powerline),
+        *draw(str(seg["bg"]), seg["fg"], f"{tag}%s", '"$session_name"', powerline),
         "fi",
     ]
 
 
-def mode_segment(seg: dict, powerline: bool) -> list[str]:
+def mode_segment(seg: dict, powerline: bool, tag: str = "") -> list[str]:
     agent_filter = _clean_text(AGENT_NAME_MAX)
     return [
         'mode_text=""',
@@ -64,6 +64,18 @@ def mode_segment(seg: dict, powerline: bool) -> list[str]:
         f"agent_name=$(echo \"$input\" | jq -r --arg e \"$G_ELLIPSIS\" '.agent.name | {agent_filter}')",
         '[ -n "$agent_name" ] && mode_add "@$agent_name"',
         'if [ -n "$mode_text" ]; then',
-        *draw(str(seg["bg"]), seg["fg"], "%s", '"$mode_text"', powerline),
+        *draw(str(seg["bg"]), seg["fg"], f"{tag}%s", '"$mode_text"', powerline),
+        "fi",
+    ]
+
+
+def thinking_segment(seg: dict, powerline: bool) -> list[str]:
+    colors = seg["colors"]
+    return [
+        "thinking=$(echo \"$input\" | jq -r '.thinking.enabled | booleans')",
+        'if [ -n "$thinking" ]; then',
+        f'  if [ "$thinking" = "true" ]; then C_THINK={colors["on"]}; think_text="think on"',
+        f'  else C_THINK={colors["off"]}; think_text="think off"; fi',
+        *draw('"$C_THINK"', seg["fg"], "%s", '"$think_text"', powerline),
         "fi",
     ]

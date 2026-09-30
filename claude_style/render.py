@@ -1,6 +1,13 @@
 """Render a Claude Code Statusline Designer config into a Claude Code statusline bash script."""
+from claude_style.config import segment_tag
 from claude_style.glyphs import glyph_definitions
-from claude_style.render_session import cache_segment, mode_segment, session_segment
+from claude_style.render_layout import collect_and_print, layout_helpers
+from claude_style.render_session import (
+    cache_segment,
+    mode_segment,
+    session_segment,
+    thinking_segment,
+)
 from claude_style.render_usage import (
     FMT_LEFT,
     limits_segment,
@@ -39,6 +46,7 @@ RESET=$'\\033[0m'
 # Both accept either a plain 256-color number ("130") or a true-color spec
 # ("rgb:R,G,B"), so any segment color can transparently be a gradient value.
 fg() {{
+  cur_fg=$1  # the thin divider between two equal backgrounds reuses the last text color
   case "$1" in
     rgb:*) local spec="${{1#rgb:}}"; local r="${{spec%%,*}}" rest="${{spec#*,}}"
            printf '\\033[38;2;%s;%s;%sm' "$r" "${{rest%%,*}}" "${{rest#*,}}" ;;
@@ -68,19 +76,6 @@ gradient_rgb() {{
   GB=0
 }}
 """
-
-POWERLINE_HELPERS = """
-sep() { fg "$1"; bg "$2"; printf '%s' "$G_SEP"; }
-sep_end() { fg "$1"; printf '\\033[49m%s%s' "$G_SEP" "$RESET"; }
-prev=""
-"""
-
-PLAIN_HELPERS = """
-plain_sep() { printf ' \\033[34m|\\033[0m '; }
-first=1
-plain_join() { [ "$first" -eq 0 ] && plain_sep; first=0; }
-"""
-
 
 def _effort_case(colors: dict) -> str:
     lines = ["case \"$effort\" in"]
@@ -142,7 +137,7 @@ def _context_color_logic(context_cfg: dict) -> str:
     return "\n".join(lines)
 
 
-def _git_segment(c: dict, powerline: bool) -> list[str]:
+def _git_segment(c: dict, powerline: bool, tag: str) -> list[str]:
     lines = ['if [ -n "$branch" ]; then']
     if powerline:
         lines += [
@@ -150,7 +145,7 @@ def _git_segment(c: dict, powerline: bool) -> list[str]:
             f'  else next={c["bg_clean"]}; dirty_glyph=""; fi',
             '  sep "$prev" "$next"',
             f'  fg {c["fg"]}',
-            '  printf " %s%s%s " "$G_BRANCH" "$branch" "$dirty_glyph"',
+            f'  printf " {tag}%s%s%s " "$G_BRANCH" "$branch" "$dirty_glyph"',
             "  prev=$next",
         ]
     else:
@@ -158,7 +153,7 @@ def _git_segment(c: dict, powerline: bool) -> list[str]:
             "  plain_join",
             f'  if [ -n "$git_status" ]; then fg {c["bg_dirty"]}; dirty_glyph="$G_DIRTY"',
             f'  else fg {c["bg_clean"]}; dirty_glyph=""; fi',
-            '  printf "%s%s%s" "$G_BRANCH" "$branch" "$dirty_glyph"; printf "$RESET"',
+            f'  printf "{tag}%s%s%s" "$G_BRANCH" "$branch" "$dirty_glyph"; printf "$RESET"',
         ]
     return lines + ["fi"]
 
@@ -200,30 +195,140 @@ def _context_bar(ctx: dict, fallback_fg: str, powerline: bool) -> list[str]:
     ]
 
 
-def _context_percent(ctx: dict, fallback_fg: str, powerline: bool) -> list[str]:
-    # With the state word already printed, it replaces the "ctx" label.
+def _context_percent(ctx: dict, fallback_fg: str, powerline: bool, has_tag: bool) -> list[str]:
+    # A state word or the "ctx" label already printed replaces the built-in "ctx".
     has_word = ctx["state_word"]
+    builtin = "" if has_word or has_tag else "ctx "
     if powerline:
-        text = f'  printf " {"" if has_word else "ctx "}%d%% " "$used_int"'
+        text = f'  printf " {builtin}%d%% " "$used_int"'
     else:
-        text = f'  printf "{" " if has_word else "ctx "}%d%%" "$used_int"; printf "$RESET"'
+        text = f'  printf "{" " if has_word else builtin}%d%%" "$used_int"; printf "$RESET"'
     return [_tint('"$used_int"', fallback_fg), text]
 
 
-def _context_segment(ctx: dict, powerline: bool) -> list[str]:
+def _context_segment(ctx: dict, powerline: bool, tag: str) -> list[str]:
     # Without true color: in powerline mode the threshold color is the segment
     # background, so bar and word use the text color; in plain mode there is no
     # background, so the threshold color itself is drawn.
     fallback_fg = ctx["fg"] if powerline else '"$C_CTX"'
     lines = ['if [ -n "$used" ]; then']
     lines += ['  sep "$prev" "$C_CTX"', f'  fg {ctx["fg"]}'] if powerline else ["  plain_join", '  fg "$C_CTX"']
+    if tag:
+        # powerline: " ctx" and the parts below lead with their own space; plain: "ctx " leads the
+        # segment, in the text color (with true color, $C_CTX is the dark bar background)
+        lines.append(f'  printf " {tag.rstrip()}"' if powerline else f'  fg {ctx["fg"]}; printf "{tag}"; fg "$C_CTX"')
     if ctx["state_word"]:
         lines += _state_word(ctx, fallback_fg, powerline)
-    body = _context_bar if ctx["style"] == "bar" else _context_percent
-    lines += body(ctx, fallback_fg, powerline)
+    if ctx["style"] == "bar":
+        lines += _context_bar(ctx, fallback_fg, powerline)
+    else:
+        lines += _context_percent(ctx, fallback_fg, powerline, bool(tag))
     if powerline:
         lines.append("  prev=$C_CTX")
     return lines + ["fi"]
+
+
+def _simple_segment(c: dict, text: str, args: str, powerline: bool) -> list[str]:
+    """A segment with one fixed background (powerline) or text color (plain)."""
+    if powerline:
+        return [f'sep "$prev" {c["bg"]}', f'fg {c["fg"]}', f'printf " {text} " {args}', f'prev={c["bg"]}']
+    return ["plain_join", f'fg {c["fg"]}; printf "{text}" {args}; printf "$RESET"']
+
+
+def _model_and_effort(seg: dict, powerline: bool, tags: dict) -> list[str]:
+    body = []
+    if seg["model"]["enabled"]:
+        c = seg["model"]
+        if powerline:
+            body += [f'sep "$prev" {c["bg"]}', f'fg {c["fg"]}', f'printf " {tags["model"]}%s" "$model"', f'prev={c["bg"]}']
+        else:
+            body += ["plain_join", f'fg {c["fg"]}; printf "{tags["model"]}%s" "$model"; printf "$RESET"']
+
+    if seg["effort"]["enabled"]:
+        ec = seg["effort"]
+        body.append('if [ -n "$effort" ]; then')
+        if powerline:
+            opener = "sep_glued" if seg["model"]["enabled"] else "sep"
+            body += [f'  {opener} "$prev" "$C_EFFORT"', f'  fg {ec["fg"]}', f'  printf " {tags["effort"]}%s " "$effort"', "  prev=$C_EFFORT"]
+        else:
+            joiner = f" {tags['effort']}" if tags["effort"] else "/"
+            body += [f'  printf "{joiner}"', '  fg "$C_EFFORT"; printf "%s" "$effort"; printf "$RESET"']
+        body.append("fi")
+    if powerline and seg["model"]["enabled"] and not seg["effort"]["enabled"]:
+        body.append('printf " "')
+    return body
+
+
+def _output_style(c: dict, powerline: bool, tag: str) -> list[str]:
+    # Plain mode has no background to tell the style apart, so it keeps a "style:" prefix.
+    text = f"{tag}%s" if powerline or tag else "style:%s"
+    body = ['if [ -n "$outstyle" ] && [ "$outstyle" != "default" ]; then']
+    body += ["  " + line for line in _simple_segment(c, text, '"$outstyle"', powerline)]
+    return body + ["fi"]
+
+
+def _cost(cc: dict, powerline: bool, tag: str) -> list[str]:
+    guard = 'awk -v c="$cost_usd" \'BEGIN { exit !(c > 0) }\'' if cc.get("hide_zero", True) else 'true'
+    body = [
+        f'if {guard}; then',
+        f'  if awk -v c="$cost_usd" -v t="{cc.get("warn_threshold_usd", 5.0)}" \'BEGIN {{ exit !(c > t) }}\'; then',
+        f'    C_COST={cc["colors"]["warn"]}',
+        '  else',
+        f'    C_COST={cc["colors"]["normal"]}',
+        '  fi',
+    ]
+    if powerline:
+        body += ['  sep "$prev" "$C_COST"', f'  fg {cc["fg"]}', f'  LC_NUMERIC=C printf " {tag}$%.2f " "$cost_usd"', '  prev=$C_COST']
+    else:
+        body += ['  plain_join', f'  fg "$C_COST"; LC_NUMERIC=C printf "{tag}$%.2f" "$cost_usd"; printf "$RESET"']
+    return body + ['fi']
+
+
+def _duration(dc: dict, powerline: bool, tag: str) -> list[str]:
+    guard = '[ "$duration_ms" -gt 0 ]' if dc.get("hide_zero", True) else 'true'
+    body = [
+        f'if {guard}; then',
+        '  d_sec=$((duration_ms / 1000)); d_min=$((d_sec / 60)); d_h=$((d_min / 60))',
+        '  if [ "$d_h" -gt 0 ]; then d_fmt="${d_h}h$((d_min % 60))m"; else d_fmt="${d_min}m$((d_sec % 60))s"; fi',
+    ]
+    body += ["  " + line for line in _simple_segment(dc, f"{tag}%s", '"$d_fmt"', powerline)]
+    return body + ['fi']
+
+
+def _body(config: dict, powerline: bool) -> list[str]:
+    seg = config["segments"]
+    tags = {key: segment_tag(config, key) for key in seg}
+    body = []
+    if seg["user_host"]["enabled"]:
+        body += _simple_segment(seg["user_host"], f'{tags["user_host"]}%s@%s', '"$user" "$host"', powerline)
+    if seg["dir"]["enabled"]:
+        body += _simple_segment(seg["dir"], f'{tags["dir"]}%s', '"$short_dir"', powerline)
+    if seg["git"]["enabled"]:
+        body += _git_segment(seg["git"], powerline, tags["git"])
+    if seg["pr"]["enabled"]:
+        body += pr_segment(seg["pr"], powerline, tags["pr"])
+    if seg["session"]["enabled"]:
+        body += session_segment(seg["session"], powerline, tags["session"])
+    body += _model_and_effort(seg, powerline, tags)
+    if seg["thinking"]["enabled"]:
+        body += thinking_segment(seg["thinking"], powerline)
+    if seg["mode"]["enabled"]:
+        body += mode_segment(seg["mode"], powerline, tags["mode"])
+    if seg["output_style"]["enabled"]:
+        body += _output_style(seg["output_style"], powerline, tags["output_style"])
+    if seg["context"]["enabled"]:
+        body += _context_segment(seg["context"], powerline, tags["context"])
+    if seg["limits"]["enabled"]:
+        body += limits_segment(seg["limits"], powerline, tags["limits"])
+    if seg["cost"]["enabled"]:
+        body += _cost(seg["cost"], powerline, tags["cost"])
+    if seg["cache"]["enabled"]:
+        body += cache_segment(seg["cache"], powerline)
+    if seg["lines"]["enabled"]:
+        body += lines_segment(seg["lines"], powerline, tags["lines"])
+    if seg["duration"]["enabled"]:
+        body += _duration(seg["duration"], powerline, tags["duration"])
+    return body
 
 
 def render(config: dict) -> str:
@@ -234,7 +339,7 @@ def render(config: dict) -> str:
 
     parts = [HEADER.format(preset=config.get("preset", "custom"), separator=separator)]
     parts.append(glyph_definitions(config["glyphs"]))
-    parts.append(POWERLINE_HELPERS if powerline else PLAIN_HELPERS)
+    parts.append(layout_helpers(powerline, config["wrap"]))
 
     if seg["effort"]["enabled"]:
         parts.append(_effort_case(seg["effort"]["colors"]))
@@ -245,131 +350,5 @@ def render(config: dict) -> str:
     if seg["dir"]["enabled"] and seg["dir"].get("responsive", True):
         parts.append(_dir_shorten_logic(seg["dir"]))
 
-    body = []
-
-    # --- user@host ---
-    if seg["user_host"]["enabled"]:
-        c = seg["user_host"]
-        if powerline:
-            body.append(f'bg {c["bg"]}; fg {c["fg"]}')
-            body.append('printf " %s@%s " "$user" "$host"')
-            body.append(f'prev={c["bg"]}')
-        else:
-            body.append('plain_join')
-            body.append(f'fg {c["fg"]}; printf "%s@%s" "$user" "$host"; printf "$RESET"')
-
-    # --- dir ---
-    if seg["dir"]["enabled"]:
-        c = seg["dir"]
-        if powerline:
-            body.append(f'sep "$prev" {c["bg"]}')
-            body.append(f'fg {c["fg"]}')
-            body.append('printf " %s " "$short_dir"')
-            body.append(f'prev={c["bg"]}')
-        else:
-            body.append('plain_join')
-            body.append(f'fg {c["fg"]}; printf "%s" "$short_dir"; printf "$RESET"')
-
-    if seg["git"]["enabled"]:
-        body += _git_segment(seg["git"], powerline)
-    if seg["pr"]["enabled"]:
-        body += pr_segment(seg["pr"], powerline)
-    if seg["session"]["enabled"]:
-        body += session_segment(seg["session"], powerline)
-
-    # --- model + effort ---
-    if seg["model"]["enabled"]:
-        c = seg["model"]
-        if powerline:
-            body.append(f'sep "$prev" {c["bg"]}')
-            body.append(f'fg {c["fg"]}')
-            body.append('printf " %s" "$model"')
-            body.append(f'prev={c["bg"]}')
-        else:
-            body.append('plain_join')
-            body.append(f'fg {c["fg"]}; printf "%s" "$model"; printf "$RESET"')
-
-    if seg["effort"]["enabled"]:
-        ec = seg["effort"]
-        body.append('if [ -n "$effort" ]; then')
-        if powerline:
-            body.append('  sep "$prev" "$C_EFFORT"')
-            body.append(f'  fg {ec["fg"]}')
-            body.append('  printf " %s " "$effort"')
-            body.append('  prev=$C_EFFORT')
-        else:
-            body.append('  printf "/"')
-            body.append('  fg "$C_EFFORT"; printf "%s" "$effort"; printf "$RESET"')
-        body.append('fi')
-    if powerline and seg["model"]["enabled"] and not seg["effort"]["enabled"]:
-        body.append('printf " "')
-    if seg["mode"]["enabled"]:
-        body += mode_segment(seg["mode"], powerline)
-
-    # --- output style (only shown when not "default") ---
-    if seg["output_style"]["enabled"]:
-        c = seg["output_style"]
-        body.append('if [ -n "$outstyle" ] && [ "$outstyle" != "default" ]; then')
-        if powerline:
-            body.append(f'  sep "$prev" {c["bg"]}')
-            body.append(f'  fg {c["fg"]}')
-            body.append('  printf " %s " "$outstyle"')
-            body.append(f'  prev={c["bg"]}')
-        else:
-            body.append('  plain_join')
-            body.append(f'  fg {c["fg"]}; printf "style:%s" "$outstyle"; printf "$RESET"')
-        body.append('fi')
-
-    if seg["context"]["enabled"]:
-        body += _context_segment(seg["context"], powerline)
-    if seg["limits"]["enabled"]:
-        body += limits_segment(seg["limits"], powerline)
-
-    # --- cost ---
-    if seg["cost"]["enabled"]:
-        cc = seg["cost"]
-        guard = 'awk -v c="$cost_usd" \'BEGIN { exit !(c > 0) }\'' if cc.get("hide_zero", True) else 'true'
-        body.append(f'if {guard}; then')
-        body.append(f'  if awk -v c="$cost_usd" -v t="{cc.get("warn_threshold_usd", 5.0)}" \'BEGIN {{ exit !(c > t) }}\'; then')
-        body.append(f'    C_COST={cc["colors"]["warn"]}')
-        body.append('  else')
-        body.append(f'    C_COST={cc["colors"]["normal"]}')
-        body.append('  fi')
-        if powerline:
-            body.append('  sep "$prev" "$C_COST"')
-            body.append(f'  fg {cc["fg"]}')
-            body.append('  LC_NUMERIC=C printf " $%.2f " "$cost_usd"')
-            body.append('  prev=$C_COST')
-        else:
-            body.append('  plain_join')
-            body.append('  fg "$C_COST"; LC_NUMERIC=C printf "$%.2f" "$cost_usd"; printf "$RESET"')
-        body.append('fi')
-
-    if seg["cache"]["enabled"]:
-        body += cache_segment(seg["cache"], powerline)
-    if seg["lines"]["enabled"]:
-        body += lines_segment(seg["lines"], powerline)
-
-    # --- duration ---
-    if seg["duration"]["enabled"]:
-        dc = seg["duration"]
-        guard = '[ "$duration_ms" -gt 0 ]' if dc.get("hide_zero", True) else 'true'
-        body.append(f'if {guard}; then')
-        body.append('  d_sec=$((duration_ms / 1000)); d_min=$((d_sec / 60)); d_h=$((d_min / 60))')
-        body.append('  if [ "$d_h" -gt 0 ]; then d_fmt="${d_h}h$((d_min % 60))m"; else d_fmt="${d_min}m$((d_sec % 60))s"; fi')
-        if powerline:
-            body.append(f'  sep "$prev" {dc["bg"]}')
-            body.append(f'  fg {dc["fg"]}')
-            body.append('  printf " %s " "$d_fmt"')
-            body.append(f'  prev={dc["bg"]}')
-        else:
-            body.append('  plain_join')
-            body.append(f'  fg {dc["fg"]}; printf "%s" "$d_fmt"; printf "$RESET"')
-        body.append('fi')
-
-    parts.append("\n".join(body))
-
-    if powerline:
-        parts.append('[ -n "$prev" ] && sep_end "$prev"')
-
+    parts.append(collect_and_print(_body(config, powerline), powerline))
     return "\n\n".join(parts) + "\n"

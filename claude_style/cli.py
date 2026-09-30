@@ -36,6 +36,7 @@ from claude_style.validate import ConfigError
 
 DISTRIBUTION = "claude-code-statusline-designer"
 CONTEXT_WORD_TOGGLE = "context-word"  # `toggle context-word on` = the Smart -> Dumb mood word
+OPTION_TOGGLES = ("labels", "wrap")  # `toggle labels on`: whole-statusline options, not segments
 EXIT_OK = 0
 EXIT_ERROR = 1
 EXIT_INTERRUPTED = 130  # shell convention: 128 + SIGINT
@@ -55,6 +56,8 @@ def _print_menu(config: dict, installed: bool) -> None:
     print(f"  g. cycle glyphs (now: {config['glyphs']} - {GLYPH_MODE_LABELS[config['glyphs']]})")
     word = "on" if config["segments"]["context"]["state_word"] else "off"
     print(f"  o. context mood word Smart -> Dumb (now: {word})")
+    print(f"  l. labels before values, e.g. 'ctx', 'cost' (now: {'on' if config['labels'] else 'off'})")
+    print(f"  a. wrap onto a second row when too wide (now: {'on' if config['wrap'] else 'off'})")
     print("  c. edit a segment's individual colors")
     print("  w. save current look as your own scheme")
     print("  x. export current look to a file")
@@ -195,6 +198,10 @@ def _classic_action(choice: str, config: dict) -> dict:
         ctx = config["segments"]["context"]
         ctx["state_word"] = not ctx["state_word"]
         preview(config)
+    elif choice in ("l", "a"):
+        option = "labels" if choice == "l" else "wrap"
+        config[option] = not config[option]
+        preview(config)
     elif choice.isdigit() and 1 <= int(choice) <= len(SEGMENT_ORDER):
         key = SEGMENT_ORDER[int(choice) - 1]
         config["segments"][key]["enabled"] = not config["segments"][key]["enabled"]
@@ -257,8 +264,8 @@ def build_parser() -> argparse.ArgumentParser:
     p_preset = sub.add_parser("preset", help="switch to a built-in preset or one of your schemes")
     p_preset.add_argument("name", help="see 'claude-style presets'")
 
-    p_toggle = sub.add_parser("toggle", help="enable/disable a segment")
-    p_toggle.add_argument("segment", choices=[*SEGMENT_ORDER, CONTEXT_WORD_TOGGLE])
+    p_toggle = sub.add_parser("toggle", help="enable/disable a segment, labels or wrapping")
+    p_toggle.add_argument("segment", choices=[*SEGMENT_ORDER, CONTEXT_WORD_TOGGLE, *OPTION_TOGGLES])
     p_toggle.add_argument("state", choices=["on", "off"])
 
     p_glyphs = sub.add_parser("glyphs", help="glyph set: nerdfont, unicode (no Nerd Font needed) or ascii")
@@ -359,6 +366,8 @@ def _dispatch(argv) -> None:
     elif args.command == "toggle":
         if args.segment == CONTEXT_WORD_TOGGLE:
             config["segments"]["context"]["state_word"] = args.state == "on"
+        elif args.segment in OPTION_TOGGLES:
+            config[args.segment] = args.state == "on"
         else:
             config["segments"][args.segment]["enabled"] = args.state == "on"
         save_config(config)

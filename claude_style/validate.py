@@ -138,6 +138,8 @@ def validate_config(config) -> None:
         validate_name(config["based_on"])
     _require(config.get("separator") in SEPARATORS, f"separator must be one of {SEPARATORS}")
     _require(config.get("glyphs") in GLYPH_MODES, f"glyphs must be one of {GLYPH_MODES}")
+    _require_bool(config.get("labels"), "labels")
+    _require_bool(config.get("wrap"), "wrap")
     segments = config.get("segments")
     _require(isinstance(segments, dict), "segments must be an object")
 
