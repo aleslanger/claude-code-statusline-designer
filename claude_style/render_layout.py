@@ -112,6 +112,10 @@ def layout_helpers(powerline: bool, wrap: bool) -> str:
 
 
 def collect_and_print(body: list[str], powerline: bool) -> str:
-    """Runs the segment code into $line, then lays it out."""
+    """Runs the segment code into $line, then lays it out.
+
+    The code lives in a function rather than directly inside $(...): bash 3.2
+    (macOS) can't parse a `case` pattern's ")" inside a command substitution.
+    """
     closing = ['[ -n "$prev" ] && sep_end "$prev"'] if powerline else []
-    return "\n".join(["line=$(", *body, *closing, ")", 'layout "$line"'])
+    return "\n".join(["segments() {", *body, *closing, "return 0", "}", "line=$(segments)", 'layout "$line"'])

@@ -55,10 +55,20 @@ def test_equal_neighbouring_backgrounds_get_a_thin_divider_instead_of_an_invisib
 
 
 def test_different_neighbouring_backgrounds_keep_the_arrow(config):
+    # BUSY: the 5h window is critical, the weekly one only warns.
     text = _visible(_with(config, "limits"), BUSY)
 
     assert f"5h 92% (38m) {ARROW} 7d 78%" in text
-    assert THIN not in text
+
+
+def test_without_true_color_a_red_context_next_to_a_red_limit_gets_a_thin_divider(config, monkeypatch):
+    # Regression (CI has no COLORTERM): at 90% the context uses its red threshold
+    # background, the same red as a critical limit right after it.
+    monkeypatch.delenv("COLORTERM", raising=False)
+
+    text = _visible(_with(config, "limits"), BUSY)
+
+    assert f"90% {THIN} 5h 92%" in text
 
 
 def test_thin_divider_is_drawn_in_the_text_color_of_the_segment_before_it(config):
